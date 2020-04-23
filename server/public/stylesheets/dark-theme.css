@@ -1,0 +1,23 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+header span {
+    border-top-color: white;
+}
+
+section:nth-of-type(odd) {
+    background-color: white;
+    color: black;
+}
+
+section:nth-of-type(even) {
+    background-color: black;
+    color: white;
+}
+
+footer {
+    background-color: white;
+    color: black;
+}
