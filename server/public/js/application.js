@@ -2,7 +2,7 @@ import * as router from './router.js';
 import * as styleUtils from './style-utils.js';
 
 export let onInit = () => {
-    router.navigateTo(router.routes.home);
+    router.navigateTo(router.routes.home, { shouldScrollToContent: false });
     loadDomListeners();
 };
 

@@ -1,0 +1,84 @@
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 10px;
+}
+
+label {
+    font-size: x-small;
+}
+
+input,
+textarea,
+button {
+    font-family: inherit;
+    background-color: rgba(150, 50, 0, 0.05);
+    font-size: 0.8em;
+    padding: 6px 10px;
+    margin: 8px 0;
+    border: none;
+    border-bottom: 1px solid rgba(150, 50, 0, 0.35);
+    color: rgba(150, 50, 0, 0.5);
+}
+
+input:focus,
+textarea:focus,
+button:focus {
+    outline: transparent solid 1px;
+    border-color: transparent;
+    box-shadow: 0 0 3px 1px rgba(150, 50, 0, 0.3);
+}
+
+textarea {
+    resize: none;
+}
+
+form .submit {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 0;
+    justify-content: space-between;
+}
+
+.rating-holder {
+    display: flex;
+    flex: 1 1 0;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.rating-holder #selected-rating {
+    font-weight: 600;
+    color: rgba(150, 50, 0, 1);
+}
+
+.rating {
+    direction: rtl;
+    cursor: pointer;
+}
+
+.rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+    color: rgba(150, 50, 0, 0.5);
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+    content: '\2605';
+    position: absolute;
+    color: rgba(150, 50, 0, 0.8);
+}
+
+.selected-star:before {
+    content: '\2605';
+    position: absolute;
+    color: rgba(150, 50, 0, 0.5);
+}

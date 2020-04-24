@@ -1,8 +1,52 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="/stylesheets/new-notes.css" />
-    </head>
     <body>
-        <h3>New</h3>
+        <link rel="stylesheet" href="/stylesheets/new-notes.css" />
+        <section class="slim">
+            <h2>
+                <div>Notiz</div>
+                <div>erfassen</div>
+            </h2>
+            <form>
+                <div>
+                    <label for="title">Titel:</label>
+                    <input type="text" id="title" name="title" autofocus autocomplete="off" spellcheck="false" />
+                </div>
+
+                <div>
+                    <label for="description">Beschreibung:</label>
+                    <textarea id="description" cols="65" rows="5" autocomplete="off" spellcheck="false"></textarea>
+                </div>
+
+                <div>
+                    <label>Wichtigkeit</label>
+                    <div class="rating-holder">
+                        <div class="rating">
+                            <span id="rating-5" data-value="5">☆</span>
+                            <span id="rating-4" data-value="4">☆</span>
+                            <span id="rating-3" data-value="3">☆</span>
+                            <span id="rating-2" data-value="2">☆</span>
+                            <span id="rating-1" data-value="1">☆</span>
+                        </div>
+
+                        <div>
+                            <span id="selected-rating"></span>
+                            <span>/&nbsp;5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="dueDate">Fälligkeit</label>
+                    <input type="date" id="dueDate" name="dueDate" />
+                </div>
+
+                <div class="submit">
+                    <div>&nbsp;</div>
+                    <button type="button" class="sliding-btn">
+                        <span>Speichern</span>
+                    </button>
+                </div>
+            </form>
+        </section>
     </body>
 </html>

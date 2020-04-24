@@ -5,6 +5,9 @@ body {
 
     /* Defines 1em for the entire page */
     font-size: 12px;
+
+    transition: all 0.4s;
+    transition-timing-function: ease-out;
 }
 
 h1,
@@ -97,7 +100,7 @@ aside .sun-svg {
 
 aside ul {
     font-size: 0.8em;
-    padding-left: 5px;
+    padding-left: 10px;
     margin: 0;
     list-style-type: none;
 }
@@ -113,11 +116,15 @@ aside ul > li {
     align-items: center;
 
     border-left: 2px solid transparent;
+    transition-property: font-size, border-left;
+    transition-timing-function: ease-out;
+    transition-duration: 0.4s;
 }
 
 aside ul > li.active {
     border-left: 2px solid;
     border-color: rgba(150, 50, 0, 1);
+    font-size: 1.15em;
 }
 
 aside > div {
@@ -130,11 +137,114 @@ div.content {
     flex-direction: row-reverse;
 }
 
+section {
+    display: flex;
+    flex: 1 1 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 50px 25px;
+}
+
+section.slim {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+section:not(:first-of-type) {
+    margin-top: 80px;
+}
+
+section h2 {
+    padding-top: 0.75em;
+    padding-bottom: 1em;
+
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-color: rgba(150, 50, 0, 1);
+    color: rgba(150, 50, 0, 1);
+}
+
+section > p::first-letter {
+    font-family: inherit serif;
+    color: rgba(150, 50, 0, 1);
+    float: left;
+    font-size: 28px;
+    line-height: 20px;
+    padding: 4px 6px 0 4px;
+}
+
+section:nth-of-type(odd) {
+    flex-direction: row;
+    background-color: rgba(150, 50, 0, 0.05);
+    transform: skewY(-2deg);
+    box-shadow: 2px 2px 5px 2px rgba(150, 50, 0, 0.3);
+}
+
+section:nth-of-type(even) {
+    flex-direction: row-reverse;
+    background-color: white;
+    transform: skewY(2deg);
+    box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+}
+
+section:nth-of-type(odd) h2 {
+    margin-right: 30px;
+}
+
+section:nth-of-type(even) h2 {
+    margin-left: 30px;
+}
+
 footer {
     padding: 10px;
+    margin-top: 30px;
 
     display: flex;
     flex: 1 1 0;
     justify-content: center;
     background-color: rgba(150, 50, 0, 0.05);
+}
+
+.sliding-btn {
+    display: inline-block;
+    background-color: rgba(150, 50, 0, 0.8);
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    padding: 6px 10px;
+    font-size: 1em;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.sliding-btn:hover,
+.sliding-btn {
+    background-color: rgba(150, 50, 0, 1);
+}
+
+.sliding-btn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.sliding-btn span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -10px;
+    transition: 0.5s;
+}
+
+.sliding-btn:hover span {
+    padding-right: 15px;
+}
+
+.sliding-btn:hover span:after {
+    opacity: 1;
+    right: 0;
 }
