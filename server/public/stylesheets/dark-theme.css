@@ -1,23 +1,33 @@
-body {
+body.dark-mode {
     background-color: black;
     color: white;
 }
 
-header span {
+body.dark-mode header span {
     border-top-color: white;
 }
 
-section:nth-of-type(odd) {
-    background-color: white;
-    color: black;
+body.dark-mode section:nth-of-type(odd) {
+    background-color: rgba(150, 50, 0, 0.35);
+    color: white;
 }
 
-section:nth-of-type(even) {
+body.dark-mode section:nth-of-type(even) {
     background-color: black;
     color: white;
 }
 
-footer {
-    background-color: white;
-    color: black;
+body.dark-mode aside .moon-svg {
+    /* used to style the svg with color white */
+    filter: invert(100%) sepia(8%) saturate(7087%) hue-rotate(184deg) brightness(122%) contrast(107%);
+}
+
+body.dark-mode aside .sun-svg {
+    /* used to style the svg with color white */
+    filter: invert(100%) sepia(8%) saturate(7087%) hue-rotate(184deg) brightness(122%) contrast(107%);
+}
+
+body.dark-mode footer {
+    background-color: rgba(150, 50, 0, 0.35);
+    color: white;
 }

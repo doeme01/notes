@@ -1,8 +1,11 @@
 <html>
     <head>
         <title>Notes</title>
+
+        <script src="/js/main.js" type="module"></script>
         <link rel="stylesheet" href="/stylesheets/style.css" />
-        <!--        <link rel="stylesheet" href="/stylesheets/dark-theme.css" />    -->
+        <link rel="stylesheet" href="/stylesheets/toggle.css" />
+        <link rel="stylesheet" href="/stylesheets/dark-theme.css" />
     </head>
 
     <body>
@@ -15,47 +18,28 @@
             <aside>
                 <div>
                     <span>Actions</span>
-                    <ul>
-                        <li><a href="#">Dark mode</a></li>
-                    </ul>
+                    <div class="color-switcher">
+                        <img src="/images/sun.svg" class="sun-svg" />
+                        <label class="switch">
+                            <input type="checkbox" id="style-toggle" />
+                            <span class="slider round"></span>
+                        </label>
+                        <img src="/images/moon.svg" class="moon-svg" />
+                    </div>
                 </div>
 
                 <div>
                     <span>Navigation</span>
                     <ul>
-                        <li><a href="#">Erfassen</a></li>
-                        <li><a href="#">Meine Notizen</a></li>
+                        <li><a href="javascript:void(0)" id="link-home">Home</a></li>
+                        <li><a href="javascript:void(0)" id="link-new">Erfassen</a></li>
+                        <li><a href="javascript:void(0)" id="link-myNotes">Meine Notizen</a></li>
                     </ul>
                 </div>
             </aside>
 
-            <main>
-                <section>
-                    <h2>Section Header</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-                        ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-                        dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                        sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                        justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                        ipsum dolor sit amet.
-                    </p>
-                </section>
-                <section>
-                    <h2>Section Header</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-                        ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-                        dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                        sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                        justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                        ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                        eirmod tempor invidunt ut labore et dolore magna
-                    </p>
-                </section>
-            </main>
+            <!-- dynamically change #main remove part as soon as loading works fine! -->
+            <main>&nbsp;</main>
         </div>
         <footer>
             <span>&copy; 2020, Dominik Witschard</span>
