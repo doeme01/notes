@@ -29,7 +29,7 @@ export const routes = {
 };
 
 let getDefaultsForNavigateTo = () => {
-    return { shouldScrollToContent: true };
+    return { shouldScrollToContent: false };
 };
 
 export let navigateTo = (to, options = getDefaultsForNavigateTo()) => {

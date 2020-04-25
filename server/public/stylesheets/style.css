@@ -37,7 +37,7 @@ a:hover {
 main {
     display: flex;
     flex: 1 1 0;
-    margin: 0;
+    max-width: 750px;
 }
 
 header {
@@ -135,11 +135,13 @@ div.content {
     display: flex;
     flex: 1 1 0;
     flex-direction: row-reverse;
+    justify-content: center;
 }
 
 section {
     display: flex;
     flex: 1 1 0;
+    flex-wrap: wrap;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     margin-top: 30px;
