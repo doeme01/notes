@@ -1,8 +1,8 @@
 .switch {
     position: relative;
     display: flex;
-    width: 2em;
-    height: 1em;
+    width: 2rem;
+    height: 1rem;
 }
 
 .switch input {
@@ -28,8 +28,8 @@
     content: '';
     left: 1px;
     top: 1px;
-    height: calc(1em - 2px);
-    width: calc(1em - 2px);
+    height: calc(1rem - 2px);
+    width: calc(1rem - 2px);
     background-color: white;
     transition: 0.4s;
 }
@@ -39,12 +39,12 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-    transform: translateX(1em);
+    transform: translateX(1rem);
 }
 
 /* Rounded sliders */
 .slider.round {
-    border-radius: 2em;
+    border-radius: 2rem;
 }
 
 .slider.round:before {
