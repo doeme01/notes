@@ -1,8 +1,8 @@
 .switch {
     position: relative;
     display: flex;
-    width: 20px;
-    height: 10px;
+    width: 2em;
+    height: 1em;
 }
 
 .switch input {
@@ -19,7 +19,8 @@
     right: 0;
     bottom: 0;
     background-color: rgba(150, 50, 0, 0.35);
-    transition: 0.4s;
+    transition: 0.2s;
+    transition-timing-function: ease-out;
 }
 
 .slider:before {
@@ -27,8 +28,8 @@
     content: '';
     left: 1px;
     top: 1px;
-    height: 8px;
-    width: 8px;
+    height: calc(1em - 2px);
+    width: calc(1em - 2px);
     background-color: white;
     transition: 0.4s;
 }
@@ -38,12 +39,12 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-    transform: translateX(10px);
+    transform: translateX(1em);
 }
 
 /* Rounded sliders */
 .slider.round {
-    border-radius: 35px;
+    border-radius: 2em;
 }
 
 .slider.round:before {
