@@ -28,21 +28,30 @@ export const routes = {
     myNotes: { identifier: 'myNotes', location: 'my-notes', title: 'Notizen' },
 };
 
+const cachedPages = {};
+
 let getDefaultsForNavigateTo = () => {
     return { shouldScrollToContent: false };
 };
 
+let onPageLoad = (to, options) => {
+    updatePageTitle(to.title);
+    setActiveLink(to.identifier);
+    options.shouldScrollToContent && scrollToStartOfContent();
+    to.onInitFn && to.onInitFn();
+};
+
 export let navigateTo = (to, options = getDefaultsForNavigateTo()) => {
     if (routes[to.identifier]) {
-        $('main')
-            .hide()
-            .load(`./pages/${to.location}.html`, () => {
-                updatePageTitle(to.title);
-                setActiveLink(to.identifier);
-                options.shouldScrollToContent && scrollToStartOfContent();
-                to.onInitFn && to.onInitFn();
-            })
-            .fadeIn('slow');
+        if (cachedPages[to.identifier]) {
+            $('main').hide().html(cachedPages[to.identifier]).fadeIn('slow');
+            onPageLoad(to, options);
+        } else {
+            $.get(`./pages/${to.location}.html`, (data) => {
+                cachePageContent(to.identifier, data);
+                navigateTo(to, options);
+            });
+        }
     } else {
         console.error("Pass route from exported 'routes' object! ");
     }
@@ -67,4 +76,12 @@ let scrollToStartOfContent = () => {
 
 let updatePageTitle = (to) => {
     $('title').text(to.title);
+};
+
+let cachePageContent = (pageId, pageContent) => {
+    if (cachedPages && cachedPages[pageId]) {
+        console.error('Should not call cachePageContent for already cached entry');
+    } else {
+        cachedPages[pageId] = pageContent;
+    }
 };
