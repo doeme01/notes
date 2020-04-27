@@ -1,21 +1,46 @@
 body.dark-mode {
-    background-color: black;
-    color: white;
+    background-color: rgb(189, 185, 185);
+    color: rgb(245, 243, 243);
 }
 
-body.dark-mode header span {
-    border-top-color: white;
+body.dark-mode h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: rgb(116, 4, 13);
+}
+
+body.dark-mode a {
+    color: rgb(241, 237, 237);
+}
+
+body.dark-mode header > span {
+    color: rgb(102, 101, 101);
+    border-top-color: rgb(116, 4, 13);
+}
+
+body.dark-mode section {
+    color: rgb(224, 223, 223);
+    box-shadow: 5px 5px 18px 2px rgb(224, 223, 223);
 }
 
 body.dark-mode section:nth-of-type(odd) {
-    background-color: rgba(150, 50, 0, 0.35);
-    color: white;
+    background-color: rgba(160, 149, 131, 0.35);
 }
 
 body.dark-mode section:nth-of-type(even) {
-    background-color: rgba(31, 32, 34, 1);
-    color: white;
-    box-shadow: 2px 2px 5px 2px rgba(255, 255, 255, 0.1);
+    background-color: rgb(163, 152, 150);
+}
+
+body.dark-mode section h2 {
+    color: rgb(128, 36, 40);
+    border-color: rgb(128, 36, 40);
+}
+
+body.dark-mode section > p::first-letter {
+    color: rgb(128, 36, 40);
 }
 
 body.dark-mode aside .moon-svg {
@@ -31,7 +56,7 @@ body.dark-mode aside .sun-svg {
 body.dark-mode input,
 body.dark-mode textarea,
 body.dark-mode button {
-    background-color: rgba(255, 255, 255, 0.65);
+    background-color: rgba(239, 234, 234, 0.65);
     color: rgba(150, 50, 0, 1);
 }
 
@@ -55,9 +80,4 @@ body.dark-mode .rating > span:hover ~ span:before {
 
 body.dark-mode .selected-star:before {
     color: rgba(255, 255, 255, 0.5);
-}
-
-body.dark-mode footer {
-    background-color: rgba(150, 50, 0, 0.35);
-    color: white;
 }

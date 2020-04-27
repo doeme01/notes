@@ -1,3 +1,11 @@
+section {
+    transform: skewY(0deg) !important;
+}
+
+aside {
+    transform: skewY(0deg) !important;
+}
+
 form {
     display: flex;
     flex: 1 1 0;
@@ -19,13 +27,13 @@ input,
 textarea,
 button {
     font-family: inherit;
-    background-color: rgba(150, 50, 0, 0.05);
+    background-color: rgba(255, 255, 255, 0.8);
     font-size: 1em;
     padding: 6px 10px;
     margin: 8px 0;
     border: none;
-    border-bottom: 1px solid rgba(150, 50, 0, 0.35);
-    color: rgba(150, 50, 0, 0.5);
+    border-bottom: 1px solid rgba(150, 50, 0, 1);
+    color: rgba(150, 50, 0, 1);
 }
 
 input:focus,
