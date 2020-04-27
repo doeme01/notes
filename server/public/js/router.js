@@ -1,18 +1,18 @@
-import {NewNotePage} from './new-note-page.js';
-import {LandingPage} from './landing-page.js';
-import {MyNotesPage} from './my-notes-page.js';
+import { NewNotePage } from './new-note-page.js';
+import { LandingPage } from './landing-page.js';
+import { MyNotesPage } from './my-notes-page.js';
 
 export const routes = {
     // TODO: check if identifier can be read dynamically from name of object
-    home: {identifier: 'home', location: 'landing-page', pageObject: new LandingPage()},
-    new: {identifier: 'new', location: 'new-notes', pageObject: new NewNotePage()},
-    myNotes: {identifier: 'myNotes', location: 'my-notes', pageObject: new MyNotesPage()},
+    home: { identifier: 'home', location: 'landing-page', pageObject: new LandingPage() },
+    new: { identifier: 'new', location: 'new-notes', pageObject: new NewNotePage() },
+    myNotes: { identifier: 'myNotes', location: 'my-notes', pageObject: new MyNotesPage() },
 };
 
 const cachedPages = {};
 
 let getDefaultsForNavigateTo = () => {
-    return {shouldScrollToContent: false};
+    return { shouldScrollToContent: false };
 };
 
 let onPageLoad = (to, options) => {
