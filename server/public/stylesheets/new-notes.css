@@ -1,9 +1,5 @@
-section {
-    transform: skewY(0deg) !important;
-}
-
-aside {
-    transform: skewY(0deg) !important;
+section.no-tilt {
+    transform: skewY(0deg);
 }
 
 form {
