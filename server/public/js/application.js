@@ -1,25 +1,34 @@
 import * as router from './router.js';
 import * as styleUtils from './style-utils.js';
+import { AppRouter } from './router.js';
 
-export let onInit = () => {
-    router.navigateTo(router.routes.home, { shouldScrollToContent: false });
-    loadDomListeners();
-};
+export class Application {
+    #router;
 
-let loadDomListeners = () => {
-    $('#link-new').on('click', () => {
-        router.navigateTo(router.routes.new);
-    });
+    constructor() {
+        this.#onInit();
+        this.#router = new AppRouter();
+    }
 
-    $('#link-myNotes').on('click', () => {
-        router.navigateTo(router.routes.myNotes);
-    });
+    #onInit = () => {
+        this.#loadDomListeners();
+    };
 
-    $('#link-home').on('click', () => {
-        router.navigateTo(router.routes.home);
-    });
+    #loadDomListeners = () => {
+        $('#link-new').on('click', () => {
+            this.#router.navigateTo(router.routes.new);
+        });
 
-    $('#style-toggle').on('click', () => {
-        styleUtils.toggleStyle();
-    });
-};
+        $('#link-myNotes').on('click', () => {
+            this.#router.navigateTo(router.routes.myNotes);
+        });
+
+        $('#link-home').on('click', () => {
+            this.#router.navigateTo(router.routes.home);
+        });
+
+        $('#style-toggle').on('click', () => {
+            styleUtils.toggleStyle();
+        });
+    };
+}

@@ -1,4 +1,4 @@
-import * as dataService from './data-service.js';
+import * as dataService from '../data-service.js';
 
 export class NewNotePage {
     onInit() {

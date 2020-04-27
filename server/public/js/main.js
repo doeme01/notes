@@ -1,8 +1,8 @@
 import '/jquery.min.js';
-import * as app from './application.js';
+import { Application } from './application.js';
 
 window.$ = window.jQuery = jQuery;
 
 $((_) => {
-    app.onInit();
+    new Application();
 });
