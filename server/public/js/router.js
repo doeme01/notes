@@ -1,44 +1,25 @@
-import * as dataService from './data-service.js';
-
-let loadStarRatingListeners = () => {
-    // TODO cleanup: how to store 'pages' in general?
-    for (let i = 1; i <= 5; i++) {
-        $(`#rating-${i}`).on('click', (it) => {
-            let stars$ = $(it.target).parent().children();
-
-            $.each(stars$, (index, item) => {
-                let star$ = $(item);
-                star$.removeClass('selected-star');
-
-                if (star$.attr('data-value') <= i) {
-                    star$.addClass('selected-star');
-                }
-            });
-
-            dataService.saveStarRating(i);
-            $('#selected-rating').text(dataService.getStars());
-        });
-    }
-};
+import {NewNotePage} from './new-note-page.js';
+import {LandingPage} from './landing-page.js';
+import {MyNotesPage} from './my-notes-page.js';
 
 export const routes = {
     // TODO: check if identifier can be read dynamically from name of object
-    home: { identifier: 'home', location: 'landing-page', title: 'Home' },
-    new: { identifier: 'new', location: 'new-notes', title: 'Neue Notiz', onInitFn: loadStarRatingListeners },
-    myNotes: { identifier: 'myNotes', location: 'my-notes', title: 'Notizen' },
+    home: {identifier: 'home', location: 'landing-page', pageObject: new LandingPage()},
+    new: {identifier: 'new', location: 'new-notes', pageObject: new NewNotePage()},
+    myNotes: {identifier: 'myNotes', location: 'my-notes', pageObject: new MyNotesPage()},
 };
 
 const cachedPages = {};
 
 let getDefaultsForNavigateTo = () => {
-    return { shouldScrollToContent: false };
+    return {shouldScrollToContent: false};
 };
 
 let onPageLoad = (to, options) => {
-    updatePageTitle(to.title);
+    updatePageTitle(to.pageObject.title);
     setActiveLink(to.identifier);
     options.shouldScrollToContent && scrollToStartOfContent();
-    to.onInitFn && to.onInitFn();
+    to.pageObject.onInit && to.pageObject.onInit();
 };
 
 export let navigateTo = (to, options = getDefaultsForNavigateTo()) => {
@@ -74,8 +55,8 @@ let scrollToStartOfContent = () => {
     );
 };
 
-let updatePageTitle = (to) => {
-    $('title').text(to.title);
+let updatePageTitle = (title) => {
+    $('title').text(title);
 };
 
 let cachePageContent = (pageId, pageContent) => {
