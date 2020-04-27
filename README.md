@@ -3,7 +3,7 @@ This project was built as part of the Certificate of Advanced Studies course Fro
 
 
 ## App Preview
-There is an Preview of this app: https://app.calypso.myds.me/
+You can find a preview of this application here: https://app.calypso.myds.me/
 
 
 ## Getting Started
