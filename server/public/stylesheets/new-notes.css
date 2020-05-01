@@ -51,11 +51,18 @@ form .submit {
     justify-content: space-between;
 }
 
+.error-text {
+    color: rgba(150, 50, 0, 1);
+    font-size: 0.7em;
+    padding-bottom: 1em;
+}
+
 .rating-holder {
     display: flex;
     flex: 1 1 0;
     justify-content: space-between;
-    margin-top: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .rating-holder #selected-rating {
