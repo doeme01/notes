@@ -17,7 +17,7 @@ export function minLength(input, minLength = 5) {
 export function maxLength(input, maxLength = 25) {
     if (input) {
         if (input.length > maxLength) {
-            return { maxLength: true, text: `Der Text darf nicht länger als ${maxLength} sein!` };
+            return { maxLength: true, text: `Der Text darf nicht länger als ${maxLength} Zeichen sein!` };
         }
     }
 }
@@ -35,5 +35,16 @@ export function maxNumericValue(input, maxValue = 5) {
         if (input > maxValue) {
             return { maxValue: true, text: `Der Maximalwert für diese Eingabe liegt bei ${maxValue}!` };
         }
+    }
+}
+
+export function dateInFuture(input) {
+    const now = new Date();
+    const inputDate = input ? new Date(input) : undefined;
+
+    if (!inputDate) {
+        return { required: true, text: 'Bitte geben Sie ein Datum ein' };
+    } else if (now.getUTCMilliseconds() > inputDate.getUTCMilliseconds()) {
+        return { dateNotInFuture: true, text: 'Das Datum muss in der Zukunft liegen!' };
     }
 }

@@ -1,10 +1,13 @@
-import { maxLength, minLength, maxNumericValue, minNumericValue, required } from '../utils/validators.js';
+import { maxLength, minLength, maxNumericValue, minNumericValue, required, dateInFuture } from '../utils/validators.js';
 
 let validators = {
     title: [{ fn: required }, { fn: minLength, arg: 3 }, { fn: maxLength, arg: 25 }],
-    description: [{ fn: required }, { fn: minLength, arg: 0 }, { fn: maxLength, arg: 250 }],
+    description: [
+        { fn: minLength, arg: 0 },
+        { fn: maxLength, arg: 250 },
+    ],
     importance: [{ fn: required }, { fn: minNumericValue, arg: 1 }, { fn: maxNumericValue, arg: 5 }],
-    dueDate: [],
+    dueDate: [{ fn: required }, { fn: dateInFuture }],
 };
 
 export class Project {
