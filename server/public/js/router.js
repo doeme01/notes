@@ -5,6 +5,7 @@ import { enableDarkMode, enableLightMode } from './style-utils.js';
 
 export const routes = {
     // TODO: check if identifier can be read dynamically from name of object
+    // TODO: use: Object.getOwnPropertyNames(routes)
     home: { identifier: 'home', location: 'landing-page', pageObject: new LandingPage() },
     new: { identifier: 'new', location: 'new-notes', pageObject: new NewNotePage() },
     myNotes: { identifier: 'myNotes', location: 'my-notes', pageObject: new MyNotesPage() },
