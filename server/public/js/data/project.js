@@ -48,5 +48,7 @@ export class Project {
         if (Object.keys(validation).length > 0) {
             return validation;
         }
+
+        return [];
     }
 }

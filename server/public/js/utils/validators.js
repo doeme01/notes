@@ -44,7 +44,7 @@ export function dateInFuture(input) {
 
     if (!inputDate) {
         return { required: true, text: 'Bitte geben Sie ein Datum ein' };
-    } else if (now.getUTCMilliseconds() > inputDate.getUTCMilliseconds()) {
+    } else if (now.getTime() > inputDate.getTime()) {
         return { dateNotInFuture: true, text: 'Das Datum muss in der Zukunft liegen!' };
     }
 }

@@ -8,19 +8,34 @@
             <form>
                 <div>
                     <label for="title">Titel:</label>
-                    <input type="text" id="title" name="title" autofocus autocomplete="off" spellcheck="false" />
-                    <span class="error-text">&nbsp;</span>
+                    <input
+                        type="text"
+                        class="input-element"
+                        id="title"
+                        name="title"
+                        autofocus
+                        autocomplete="off"
+                        spellcheck="false"
+                    />
+                    <span class="error-text"></span>
                 </div>
 
                 <div>
                     <label for="description">Beschreibung:</label>
-                    <textarea id="description" cols="40" rows="5" autocomplete="off" spellcheck="false"></textarea>
-                    <span class="error-text">&nbsp;</span>
+                    <textarea
+                        id="description"
+                        class="input-element"
+                        cols="40"
+                        rows="5"
+                        autocomplete="off"
+                        spellcheck="false"
+                    ></textarea>
+                    <span class="error-text"></span>
                 </div>
 
                 <div>
                     <label>Wichtigkeit</label>
-                    <div id="importance" class="rating-holder">
+                    <div id="importance" class="rating-holder input-element">
                         <div class="rating">
                             <span id="rating-5" data-value="5">☆</span>
                             <span id="rating-4" data-value="4">☆</span>
@@ -34,13 +49,13 @@
                             <span>/&nbsp;5</span>
                         </div>
                     </div>
-                    <span class="error-text">&nbsp;</span>
+                    <span class="error-text"></span>
                 </div>
 
                 <div>
                     <label for="dueDate">Fälligkeit</label>
-                    <input type="date" id="dueDate" name="dueDate" />
-                    <span class="error-text">&nbsp;</span>
+                    <input type="date" id="dueDate" class="input-element" name="dueDate" />
+                    <span class="error-text"></span>
                 </div>
 
                 <div class="submit">

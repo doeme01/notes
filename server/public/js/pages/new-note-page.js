@@ -2,25 +2,22 @@ import * as dataService from '../data-service.js';
 import { Project } from '../data/project.js';
 
 export class NewNotePage {
-    #titleInput$;
-    #descriptionInput$;
-    #dueDateInput$;
-    #newNoteImportance;
+    titleInput$;
+    descriptionInput$;
+    dueDateInput$;
+    importanceInput$;
+    formInputs$;
 
     onInit() {
-        this.#titleInput$ = $('#title');
-        this.#descriptionInput$ = $('#description');
-        this.#dueDateInput$ = $('#dueDate');
-        this.#newNoteImportance = 0;
+        this.titleInput$ = $('#title');
+        this.descriptionInput$ = $('#description');
+        this.dueDateInput$ = $('#dueDate');
+        this.importanceInput$ = $('#selected-rating');
+        this.formInputs$ = $('form .input-element');
 
-        this.#loadSubmitListener();
-        this.#loadFormValidationListeners([
-            this.#titleInput$,
-            this.#descriptionInput$,
-            this.#dueDateInput$,
-            this.#newNoteImportance,
-        ]);
-        this.#loadStarRatingListeners();
+        this.loadSubmitListener();
+        this.loadFormValidationListeners([...this.formInputs$]);
+        this.loadStarRatingListeners();
     }
 
     get title() {
@@ -28,30 +25,22 @@ export class NewNotePage {
     }
 
     get newNoteTitle() {
-        return this.#titleInput$.val();
+        return this.titleInput$.val();
     }
 
     get newNoteDescription() {
-        return this.#descriptionInput$.val();
+        return this.descriptionInput$.val();
     }
 
     get newNoteDueDate() {
-        return this.#dueDateInput$.val();
-    }
-
-    set newNoteImportance(importance) {
-        if (!isNaN(importance) && importance > 0) {
-            this.#newNoteImportance = importance;
-        } else {
-            console.error(`Cannot process 'importance' which is not a number or below zero. Given: ${importance}`);
-        }
+        return this.dueDateInput$.val();
     }
 
     get newNoteImportance() {
-        return this.#newNoteImportance;
+        return Number(this.importanceInput$.val()) || undefined;
     }
 
-    #validateProject = (inputsToUpdate = []) => {
+    validateProject = (inputsToUpdate = []) => {
         let errorObject = Project.validateProject(
             this.newNoteTitle,
             this.newNoteDescription,
@@ -64,23 +53,29 @@ export class NewNotePage {
                 ? Object.keys(errorObject).filter((key) => inputsToUpdate.includes(key))
                 : Object.keys(errorObject);
 
+        let fieldsToResetValidation =
+            inputsToUpdate.length === 0
+                ? [...this.formInputs$].map((input) => $(input).find('~ .error-text'))
+                : [...inputsToUpdate].map((input) => $(`#${input} ~ .error-text`));
+
+        $(fieldsToResetValidation).each((_, element) => $(element).text(''));
+
         keysToUpdate.forEach((key) => {
-            console.log(errorObject[key]);
             $(`#${key} ~ .error-text`).text(errorObject[key].text);
         });
     };
 
-    #loadSubmitListener = () => {
-        $('.submit > button').click((_) => this.#validateProject());
+    loadSubmitListener = () => {
+        $('.submit > button').click((_) => this.validateProject());
     };
 
-    #loadFormValidationListeners = (formInputs) => {
-        formInputs.forEach((formInput) => $(formInput).blur((_) => this.#validateProject([$(formInput).attr('id')])));
+    loadFormValidationListeners = (formInputs) => {
+        formInputs.forEach((formInput) => $(formInput).blur((_) => this.validateProject([$(formInput).attr('id')])));
     };
 
-    #loadStarRatingListeners = () => {
+    loadStarRatingListeners = () => {
         for (let i = 1; i <= 5; i++) {
-            $(`#rating-${i}`).on('click', (it) => {
+            $(`#rating-${i}`).click((it) => {
                 let stars$ = $(it.target).parent().children();
 
                 $.each(stars$, (index, item) => {
@@ -92,8 +87,8 @@ export class NewNotePage {
                     }
                 });
 
-                dataService.saveStarRating(i);
-                $('#selected-rating').text(dataService.getStars());
+                $('#selected-rating').val(i).text(i);
+                $(it.target).parent().parent().trigger('blur');
             });
         }
     };
