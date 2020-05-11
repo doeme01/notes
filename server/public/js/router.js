@@ -3,7 +3,7 @@ import { LandingPage } from './pages/landing-page.js';
 import { MyNotesPage } from './pages/my-notes-page.js';
 import { enableDarkMode, enableLightMode } from './style-utils.js';
 
-export const routes = {
+export const ROUTES = {
     // TODO: check if identifier can be read dynamically from name of object
     // TODO: use: Object.getOwnPropertyNames(routes)
     home: { identifier: 'home', location: 'landing-page', pageObject: new LandingPage() },
@@ -11,7 +11,7 @@ export const routes = {
     myNotes: { identifier: 'myNotes', location: 'my-notes', pageObject: new MyNotesPage() },
 };
 
-export const urlParamHandler = {
+export const URL_PARAM_HANDLER = {
     viewMode: {
         identifier: 'viewMode',
         handlers: {
@@ -32,12 +32,17 @@ export class AppRouter {
     }
 
     get defaultRoute() {
-        return routes.home;
+        return ROUTES.home;
     }
 
-    navigateTo = (to, opts) => {
+    static routeTo(to) {
+        // TODO check if router 'instance' can be passed to all pages for routing!
+        window.location.hash = to.location;
+    }
+
+    navigateTo(to, opts) {
         let options = $.extend({}, this.getDefaultsForNavigateTo(), opts);
-        if (routes[to.identifier]) {
+        if (ROUTES[to.identifier]) {
             this.currentPage = to;
             if (this.cachedPages[to.identifier]) {
                 $('main').hide().html(this.cachedPages[to.identifier]).fadeIn('slow');
@@ -52,56 +57,57 @@ export class AppRouter {
         } else {
             console.error("Pass route from exported 'routes' object! ");
         }
-    };
+    }
 
-    getDefaultsForNavigateTo = () => {
+    getDefaultsForNavigateTo() {
         return { shouldScrollToContent: false };
-    };
+    }
 
-    onPageLoad = (to, options) => {
+    onPageLoad(to, options) {
         this.updatePageTitle(to.pageObject.title);
         this.setActiveLink(to.identifier);
         options.shouldScrollToContent && this.scrollToStartOfContent();
         to.pageObject.onInit && to.pageObject.onInit();
-    };
+    }
 
-    updateUrl = (to) => {
+    updateUrl(to) {
         window.location.hash = to.location;
-    };
+    }
 
-    setActiveLink = (currentPageIdentifier) => {
-        Object.keys(routes).forEach((routeKey) => {
-            let currentRoute = routes[routeKey];
+    setActiveLink(currentPageIdentifier) {
+        Object.keys(ROUTES).forEach((routeKey) => {
+            let currentRoute = ROUTES[routeKey];
             $(`#link-${currentRoute.identifier}`).parent().removeClass('active');
         });
         $(`#link-${currentPageIdentifier}`).parent().addClass('active');
-    };
+    }
 
-    scrollToStartOfContent = () => {
+    scrollToStartOfContent() {
         $('body').animate(
             {
                 scrollTop: $('main').offset().top,
             },
             750
         );
-    };
+    }
 
-    updatePageTitle = (title) => {
+    updatePageTitle(title) {
         $('title').text(title);
-    };
+    }
 
-    cachePageContent = (pageId, pageContent) => {
+    cachePageContent(pageId, pageContent) {
         if (this.cachedPages && this.cachedPages[pageId]) {
             console.error('Should not call cachePageContent for already cached entry');
         } else {
             this.cachedPages[pageId] = pageContent;
         }
-    };
+    }
 
-    registerUrlChangeListener = () => {
+    registerUrlChangeListener() {
         $(window).on('hashchange', this.redirectToPageBasedOnUrl);
-    };
+    }
 
+    // function is defined as arrow function in order to keep 'this' pointing to class 'AppRouter'
     redirectToPageBasedOnUrl = () => {
         const url = window.location.hash.substr(1);
 
@@ -110,9 +116,9 @@ export class AppRouter {
         }
 
         if (url && (!this.currentPage || this.currentPage.location !== url)) {
-            const routeToNavigate = Object.keys(routes).filter((key) => routes[key].location === url);
+            const routeToNavigate = Object.keys(ROUTES).filter((key) => ROUTES[key].location === url);
             if (routeToNavigate && routeToNavigate.length === 1) {
-                this.navigateTo(routes[routeToNavigate[0]]);
+                this.navigateTo(ROUTES[routeToNavigate[0]]);
             } else {
                 console.error('passed an unknown route ', url);
                 this.navigateTo(this.defaultRoute);
@@ -120,11 +126,11 @@ export class AppRouter {
         }
     };
 
-    parseQueryParams = () => {
+    parseQueryParams() {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams) {
-            Object.keys(urlParamHandler).forEach((key) => {
-                let paramHandler = urlParamHandler[key];
+            Object.keys(URL_PARAM_HANDLER).forEach((key) => {
+                let paramHandler = URL_PARAM_HANDLER[key];
                 if (urlParams.has(paramHandler.identifier)) {
                     let paramValue = urlParams.get(paramHandler.identifier);
                     if (Object.keys(paramHandler.handlers).includes(paramValue)) {
@@ -133,5 +139,5 @@ export class AppRouter {
                 }
             });
         }
-    };
+    }
 }

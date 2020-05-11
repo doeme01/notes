@@ -1,4 +1,4 @@
-import * as router from './router.js';
+import { ROUTES } from './router.js';
 import * as styleUtils from './style-utils.js';
 import { AppRouter } from './router.js';
 
@@ -16,15 +16,15 @@ export class Application {
 
     loadDomListeners = () => {
         $('#link-new').click(() => {
-            this.router.navigateTo(router.routes.new);
+            this.router.navigateTo(ROUTES.new);
         });
 
         $('#link-myNotes').click(() => {
-            this.router.navigateTo(router.routes.myNotes);
+            this.router.navigateTo(ROUTES.myNotes);
         });
 
         $('#link-home').click(() => {
-            this.router.navigateTo(router.routes.home);
+            this.router.navigateTo(ROUTES.home);
         });
 
         $('#style-toggle').click(() => {

@@ -1,4 +1,4 @@
-import { urlParamHandler } from './router.js';
+import { URL_PARAM_HANDLER } from './router.js';
 
 export const toggleStyle = () => {
     const $body = $('body');
@@ -16,7 +16,7 @@ export const enableDarkMode = () => {
         $body.addClass('dark-mode');
         $('#style-toggle').attr('checked', true);
     }
-    persistUrlState(urlParamHandler.viewMode.identifier, 'dark');
+    persistUrlState(URL_PARAM_HANDLER.viewMode.identifier, 'dark');
 };
 
 export const enableLightMode = () => {
@@ -27,7 +27,7 @@ export const enableLightMode = () => {
         $('#style-toggle').attr('checked', false);
     }
 
-    persistUrlState(urlParamHandler.viewMode.identifier, 'light');
+    persistUrlState(URL_PARAM_HANDLER.viewMode.identifier, 'light');
 };
 
 const persistUrlState = (queryParamName, queryParamValue) => {

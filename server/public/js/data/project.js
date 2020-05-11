@@ -11,16 +11,15 @@ let validators = {
 };
 
 export class Project {
-    title;
-    description;
-    importance;
-    dueDate;
-
     constructor(title, description, importance, dueDate) {
         this.title = title;
         this.description = description;
         this.importance = importance;
         this.dueDate = dueDate;
+    }
+
+    isValid() {
+        return Project.validateProject(this.title, this.description, this.importance, this.dueDate);
     }
 
     static validateProject(title, description, importance, dueDate) {

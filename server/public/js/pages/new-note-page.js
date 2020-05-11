@@ -1,13 +1,8 @@
-import * as dataService from '../data-service.js';
 import { Project } from '../data/project.js';
+import { persistProject } from '../service/project-service.js';
+import { AppRouter, ROUTES } from '../router.js';
 
 export class NewNotePage {
-    titleInput$;
-    descriptionInput$;
-    dueDateInput$;
-    importanceInput$;
-    formInputs$;
-
     onInit() {
         this.titleInput$ = $('#title');
         this.descriptionInput$ = $('#description');
@@ -40,20 +35,20 @@ export class NewNotePage {
         return Number(this.importanceInput$.val()) || undefined;
     }
 
-    validateProject = (inputsToUpdate = []) => {
-        let errorObject = Project.validateProject(
+    validateProject(inputsToUpdate = []) {
+        const errorObject = Project.validateProject(
             this.newNoteTitle,
             this.newNoteDescription,
             this.newNoteImportance,
             this.newNoteDueDate
         );
 
-        let keysToUpdate =
+        const keysToUpdate =
             inputsToUpdate.length > 0
                 ? Object.keys(errorObject).filter((key) => inputsToUpdate.includes(key))
                 : Object.keys(errorObject);
 
-        let fieldsToResetValidation =
+        const fieldsToResetValidation =
             inputsToUpdate.length === 0
                 ? [...this.formInputs$].map((input) => $(input).find('~ .error-text'))
                 : [...inputsToUpdate].map((input) => $(`#${input} ~ .error-text`));
@@ -63,23 +58,34 @@ export class NewNotePage {
         keysToUpdate.forEach((key) => {
             $(`#${key} ~ .error-text`).text(errorObject[key].text);
         });
-    };
 
-    loadSubmitListener = () => {
-        $('.submit > button').click((_) => this.validateProject());
-    };
+        return Object.keys(errorObject).length === 0;
+    }
 
-    loadFormValidationListeners = (formInputs) => {
+    submitProject() {
+        if (this.validateProject()) {
+            persistProject(
+                new Project(this.newNoteTitle, this.newNoteDescription, this.newNoteImportance, this.newNoteDueDate),
+                (_) => AppRouter.routeTo(ROUTES.myNotes)
+            );
+        }
+    }
+
+    loadSubmitListener() {
+        $('.submit > button').click((_) => this.submitProject());
+    }
+
+    loadFormValidationListeners(formInputs) {
         formInputs.forEach((formInput) => $(formInput).blur((_) => this.validateProject([$(formInput).attr('id')])));
-    };
+    }
 
-    loadStarRatingListeners = () => {
+    loadStarRatingListeners() {
         for (let i = 1; i <= 5; i++) {
             $(`#rating-${i}`).click((it) => {
-                let stars$ = $(it.target).parent().children();
+                const stars$ = $(it.target).parent().children();
 
                 $.each(stars$, (index, item) => {
-                    let star$ = $(item);
+                    const star$ = $(item);
                     star$.removeClass('selected-star');
 
                     if (star$.attr('data-value') <= i) {
@@ -91,5 +97,5 @@ export class NewNotePage {
                 $(it.target).parent().parent().trigger('blur');
             });
         }
-    };
+    }
 }
