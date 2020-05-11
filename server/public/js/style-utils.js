@@ -1,7 +1,7 @@
 import { urlParamHandler } from './router.js';
 
-export let toggleStyle = () => {
-    let $body = $('body');
+export const toggleStyle = () => {
+    const $body = $('body');
     if ($body.hasClass('dark-mode')) {
         enableLightMode();
     } else {
@@ -9,8 +9,8 @@ export let toggleStyle = () => {
     }
 };
 
-export let enableDarkMode = () => {
-    let $body = $('body');
+export const enableDarkMode = () => {
+    const $body = $('body');
 
     if (!$body.hasClass('dark-mode')) {
         $body.addClass('dark-mode');
@@ -19,8 +19,8 @@ export let enableDarkMode = () => {
     persistUrlState(urlParamHandler.viewMode.identifier, 'dark');
 };
 
-export let enableLightMode = () => {
-    let $body = $('body');
+export const enableLightMode = () => {
+    const $body = $('body');
 
     if ($body.hasClass('dark-mode')) {
         $body.removeClass('dark-mode');
@@ -30,8 +30,8 @@ export let enableLightMode = () => {
     persistUrlState(urlParamHandler.viewMode.identifier, 'light');
 };
 
-let persistUrlState = (queryParamName, queryParamValue) => {
-    let url = new URL(window.location.href);
+const persistUrlState = (queryParamName, queryParamValue) => {
+    const url = new URL(window.location.href);
     url.searchParams.set(queryParamName, queryParamValue);
     // change url without reloading page
     history.pushState({}, null, url.href);

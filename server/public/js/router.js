@@ -22,13 +22,13 @@ export const urlParamHandler = {
 };
 
 export class AppRouter {
-    #cachedPages = {};
-    #currentPage;
+    cachedPages = {};
+    currentPage;
 
     constructor() {
-        this.#registerUrlChangeListener();
-        this.#redirectToPageBasedOnUrl();
-        this.#parseQueryParams();
+        this.registerUrlChangeListener();
+        this.redirectToPageBasedOnUrl();
+        this.parseQueryParams();
     }
 
     get defaultRoute() {
@@ -36,16 +36,16 @@ export class AppRouter {
     }
 
     navigateTo = (to, opts) => {
-        let options = $.extend({}, this.#getDefaultsForNavigateTo(), opts);
+        let options = $.extend({}, this.getDefaultsForNavigateTo(), opts);
         if (routes[to.identifier]) {
-            this.#currentPage = to;
-            if (this.#cachedPages[to.identifier]) {
-                $('main').hide().html(this.#cachedPages[to.identifier]).fadeIn('slow');
-                this.#updateUrl(to);
-                this.#onPageLoad(to, options);
+            this.currentPage = to;
+            if (this.cachedPages[to.identifier]) {
+                $('main').hide().html(this.cachedPages[to.identifier]).fadeIn('slow');
+                this.updateUrl(to);
+                this.onPageLoad(to, options);
             } else {
                 $.get(`./pages/${to.location}.html`, (data) => {
-                    this.#cachePageContent(to.identifier, data);
+                    this.cachePageContent(to.identifier, data);
                     this.navigateTo(to, options);
                 });
             }
@@ -54,22 +54,22 @@ export class AppRouter {
         }
     };
 
-    #getDefaultsForNavigateTo = () => {
+    getDefaultsForNavigateTo = () => {
         return { shouldScrollToContent: false };
     };
 
-    #onPageLoad = (to, options) => {
-        this.#updatePageTitle(to.pageObject.title);
-        this.#setActiveLink(to.identifier);
-        options.shouldScrollToContent && this.#scrollToStartOfContent();
+    onPageLoad = (to, options) => {
+        this.updatePageTitle(to.pageObject.title);
+        this.setActiveLink(to.identifier);
+        options.shouldScrollToContent && this.scrollToStartOfContent();
         to.pageObject.onInit && to.pageObject.onInit();
     };
 
-    #updateUrl = (to) => {
+    updateUrl = (to) => {
         window.location.hash = to.location;
     };
 
-    #setActiveLink = (currentPageIdentifier) => {
+    setActiveLink = (currentPageIdentifier) => {
         Object.keys(routes).forEach((routeKey) => {
             let currentRoute = routes[routeKey];
             $(`#link-${currentRoute.identifier}`).parent().removeClass('active');
@@ -77,7 +77,7 @@ export class AppRouter {
         $(`#link-${currentPageIdentifier}`).parent().addClass('active');
     };
 
-    #scrollToStartOfContent = () => {
+    scrollToStartOfContent = () => {
         $('body').animate(
             {
                 scrollTop: $('main').offset().top,
@@ -86,30 +86,30 @@ export class AppRouter {
         );
     };
 
-    #updatePageTitle = (title) => {
+    updatePageTitle = (title) => {
         $('title').text(title);
     };
 
-    #cachePageContent = (pageId, pageContent) => {
-        if (this.#cachedPages && this.#cachedPages[pageId]) {
+    cachePageContent = (pageId, pageContent) => {
+        if (this.cachedPages && this.cachedPages[pageId]) {
             console.error('Should not call cachePageContent for already cached entry');
         } else {
-            this.#cachedPages[pageId] = pageContent;
+            this.cachedPages[pageId] = pageContent;
         }
     };
 
-    #registerUrlChangeListener = () => {
-        $(window).on('hashchange', this.#redirectToPageBasedOnUrl);
+    registerUrlChangeListener = () => {
+        $(window).on('hashchange', this.redirectToPageBasedOnUrl);
     };
 
-    #redirectToPageBasedOnUrl = () => {
+    redirectToPageBasedOnUrl = () => {
         const url = window.location.hash.substr(1);
 
-        if (!url && !this.#currentPage) {
+        if (!url && !this.currentPage) {
             this.navigateTo(this.defaultRoute);
         }
 
-        if (url && (!this.#currentPage || this.#currentPage.location !== url)) {
+        if (url && (!this.currentPage || this.currentPage.location !== url)) {
             const routeToNavigate = Object.keys(routes).filter((key) => routes[key].location === url);
             if (routeToNavigate && routeToNavigate.length === 1) {
                 this.navigateTo(routes[routeToNavigate[0]]);
@@ -120,7 +120,7 @@ export class AppRouter {
         }
     };
 
-    #parseQueryParams = () => {
+    parseQueryParams = () => {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams) {
             Object.keys(urlParamHandler).forEach((key) => {
