@@ -45,18 +45,26 @@ export class AppRouter {
         if (ROUTES[to.identifier]) {
             this.currentPage = to;
             if (this.cachedPages[to.identifier]) {
-                $('main').hide().html(this.cachedPages[to.identifier]).fadeIn('slow');
-                this.updateUrl(to);
-                this.onPageLoad(to, options);
+                if (to.pageObject.renderView) {
+                    to.pageObject.renderView((content) => this.displayView(content, to, options));
+                } else {
+                    this.displayView(this.cachedPages[to.identifier], to, options);
+                }
             } else {
                 $.get(`./pages/${to.location}.html`, (data) => {
-                    this.cachePageContent(to.identifier, data);
+                    this.cachePageContent(to, data);
                     this.navigateTo(to, options);
                 });
             }
         } else {
             console.error("Pass route from exported 'routes' object! ");
         }
+    }
+
+    displayView(pageContent, to, options) {
+        $('main').hide().html(pageContent).fadeIn('slow');
+        this.updateUrl(to);
+        this.onPageLoad(to, options);
     }
 
     getDefaultsForNavigateTo() {
@@ -95,11 +103,12 @@ export class AppRouter {
         $('title').text(title);
     }
 
-    cachePageContent(pageId, pageContent) {
-        if (this.cachedPages && this.cachedPages[pageId]) {
+    cachePageContent(to, pageContent) {
+        if (this.cachedPages && this.cachedPages[to.identifier]) {
             console.error('Should not call cachePageContent for already cached entry');
         } else {
-            this.cachedPages[pageId] = pageContent;
+            this.cachedPages[to.identifier] = pageContent;
+            to.pageObject.prepareView && to.pageObject.prepareView(pageContent);
         }
     }
 

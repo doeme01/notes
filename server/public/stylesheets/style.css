@@ -27,6 +27,10 @@ h1 {
     font-size: 3em;
 }
 
+h6 {
+    font-size: 1.2em;
+}
+
 a {
     color: gray;
     text-decoration: none;

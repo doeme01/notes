@@ -1,11 +1,17 @@
 <html>
     <body>
-        <section class="slim">
-            <h2>Meine Notizen</h2>
-            <p>
-                Hier findest Du all deine Notizen. Du kannst die Notizen filtern, sortieren und editieren. Klicke dafür
-                einfach auf die entsprechende Notiz.
-            </p>
-        </section>
+        <div id="my-notes">
+            <h2 id="title">Deine Notizen</h2>
+            <div id="notes-container">
+                {{#each notes}}
+                <div class="note">
+                    <h6>{{title}}</h6>
+                    <pre>{{dueDate}}</pre>
+                    <p>{{importance}}</p>
+                    <p>{{description}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </div>
     </body>
 </html>

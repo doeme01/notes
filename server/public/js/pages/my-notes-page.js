@@ -5,9 +5,14 @@ export class MyNotesPage {
         return 'Übersicht';
     }
 
-    onInit() {
+    prepareView(html) {
+        this.template = Handlebars.compile(html);
+    }
+
+    renderView(onRender) {
         getProjects((res) => {
-            console.log('res in controller, {}', res);
+            console.log(res);
+            onRender(this.template({ notes: res }));
         });
     }
 }

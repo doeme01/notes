@@ -1,0 +1,35 @@
+#my-notes {
+    width: 100%;
+}
+
+#notes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#title {
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid darkgray;
+}
+
+#notes-container h6 {
+    margin: 0;
+}
+
+#notes-container > * {
+    flex-basis: 25%;
+    margin-right: 2em;
+    margin-bottom: 2em;
+    padding: 1em;
+    border-radius: 0.5em;
+}
+
+#notes-container > *:nth-of-type(odd) {
+    background-color: rgb(248, 246, 246);
+}
+
+#notes-container > *:nth-of-type(even) {
+    background-color: rgb(238, 233, 232);
+}

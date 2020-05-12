@@ -1,5 +1,5 @@
 const projects = [];
-const projectAttributes = ['title', 'description', 'dueDate', 'importance'];
+const projectAttributes = ['title', 'dueDate', 'importance'];
 
 function isValidProject(project) {
     return projectAttributes.every((attr) => !!project[attr]);
