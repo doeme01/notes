@@ -7,8 +7,9 @@ router.post('/', function (req, res, next) {
     const savedProject = projectService.saveProject(req.body);
     if (savedProject) {
         res.status(200).send(savedProject);
+    } else {
+        res.sendStatus(400);
     }
-    res.sendStatus(400);
 });
 
 /* Fetches all Projects */

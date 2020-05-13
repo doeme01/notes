@@ -233,6 +233,19 @@ footer {
     color: rgb(102, 101, 101);
 }
 
+button.btn-link {
+    background: none !important;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-right: 1em;
+}
+
+button.btn-link:focus {
+    box-shadow: none;
+}
+
 .sliding-btn {
     display: inline-block;
     background-color: rgba(150, 50, 0, 0.8);

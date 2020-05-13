@@ -3,6 +3,19 @@ import { persistProject } from '../service/project-service.js';
 import { AppRouter, ROUTES } from '../router.js';
 
 export class NewNotePage {
+    actionButtonListeners = {
+        'btn-tomorrow': () => {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            this.changeInputDate(tomorrow.toISOString().substring(0, 10));
+        },
+        'btn-nextMonth': () => {
+            const today = new Date();
+            const nextMonth = new Date(today.getFullYear(), today.getMonth() + 2, 1, 18);
+            this.changeInputDate(nextMonth.toISOString().substring(0, 10));
+        },
+    };
+
     onInit() {
         this.titleInput$ = $('#title');
         this.descriptionInput$ = $('#description');
@@ -13,6 +26,7 @@ export class NewNotePage {
         this.loadSubmitListener();
         this.loadFormValidationListeners([...this.formInputs$]);
         this.loadStarRatingListeners();
+        this.loadActionBtnListeners(this.actionButtonListeners);
     }
 
     get title() {
@@ -33,6 +47,11 @@ export class NewNotePage {
 
     get newNoteImportance() {
         return Number(this.importanceInput$.val()) || undefined;
+    }
+
+    changeInputDate(isoDateString) {
+        this.dueDateInput$.val(isoDateString);
+        this.validateProject([this.dueDateInput$.attr('id')]);
     }
 
     validateProject(inputsToUpdate = []) {
@@ -96,6 +115,13 @@ export class NewNotePage {
                 $('#selected-rating').val(i).text(i);
                 $(it.target).parent().parent().trigger('blur');
             });
+        }
+    }
+
+    loadActionBtnListeners(clickHandlers) {
+        for (let clickHandlerKey in clickHandlers) {
+            const btn$ = $(`#${clickHandlerKey}`);
+            btn$.click(() => clickHandlers[clickHandlerKey]());
         }
     }
 }

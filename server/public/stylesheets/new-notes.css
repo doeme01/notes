@@ -94,3 +94,10 @@ form .submit {
     position: absolute;
     color: rgba(150, 50, 0, 0.5);
 }
+
+.quick-actions {
+    margin-top: -5px;
+    display: flex;
+    flex: 1 1 0;
+    justify-content: flex-start;
+}
