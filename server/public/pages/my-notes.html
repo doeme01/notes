@@ -1,11 +1,17 @@
-<html>
+<html lang="de">
     <body>
-        <div id="my-notes">
-            <h2 id="title">Deine Notizen</h2>
-            <div id="notes-container">
+        <div class="my-notes">
+            <h2 class="title">Deine Notizen</h2>
+            <div class="notes-container">
                 {{#each notes}}
                 <div class="note">
-                    <h6>{{title}}</h6>
+                    <div class="note-title">
+                        <h6>{{title}}</h6>
+                        <button class="deleteNote show-on-note-hover btn-link" type="button" data-index="{{id}}">
+                            Delete
+                        </button>
+                    </div>
+                    <pre>{{id}}</pre>
                     <pre>{{dueDate}}</pre>
                     <p>{{importance}}</p>
                     <p>{{description}}</p>

@@ -1,24 +1,24 @@
-#my-notes {
+.my-notes {
     width: 100%;
 }
 
-#notes-container {
+.notes-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-#title {
+.title {
     padding-bottom: 0.5em;
     margin-bottom: 1em;
     border-bottom: 1px solid darkgray;
 }
 
-#notes-container h6 {
+.notes-container h6 {
     margin: 0;
 }
 
-#notes-container > * {
+.notes-container > * {
     flex-basis: 25%;
     margin-right: 2em;
     margin-bottom: 2em;
@@ -26,10 +26,35 @@
     border-radius: 0.5em;
 }
 
-#notes-container > *:nth-of-type(odd) {
+.notes-container > *:nth-of-type(odd) {
     background-color: rgb(248, 246, 246);
 }
 
-#notes-container > *:nth-of-type(even) {
+.notes-container > *:nth-of-type(even) {
     background-color: rgb(238, 233, 232);
+}
+
+.note {
+    transition: box-shadow 0.2s;
+}
+
+.note:hover {
+    box-shadow: 0 0 3px 1px rgba(150, 50, 0, 0.3);
+}
+
+.note-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.note-title button {
+    font-size: 0.8em;
+}
+
+.show-on-note-hover {
+    visibility: hidden;
+}
+
+.note:hover .show-on-note-hover {
+    visibility: visible;
 }

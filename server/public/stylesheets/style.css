@@ -240,6 +240,11 @@ button.btn-link {
     cursor: pointer;
     font-size: 0.8em;
     margin-right: 1em;
+    transition: transform 0.2s;
+}
+
+button.btn-link:hover {
+    transform: scale(1.1);
 }
 
 button.btn-link:focus {

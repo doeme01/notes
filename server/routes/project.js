@@ -17,4 +17,13 @@ router.get('/', function (req, res, next) {
     res.send(projectService.getProjects());
 });
 
+router.delete('/:id', function (req, res, next) {
+    const id = req.params.id;
+    const remainingProjects = projectService.deleteProject(id);
+    if (remainingProjects) {
+        res.send(projectService.getProjects());
+    }
+    res.sendStatus(400);
+});
+
 module.exports = router;
