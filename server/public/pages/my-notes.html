@@ -4,17 +4,23 @@
             <h2 class="title">Deine Notizen</h2>
             <div class="notes-container">
                 {{#each notes}}
-                <div class="note">
-                    <div class="note-title">
-                        <h6>{{title}}</h6>
+                <div class="note-card">
+                    <div class="note">
+                        <div>
+                            <h6>{{title}}</h6>
+                            <p>{{dueDate}}</p>
+                            <p>{{importance}}</p>
+                            <p>{{description}}</p>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="show-on-note-hover btn-link" type="button" data-index="{{id}}">
+                            Erledigen
+                        </button>
                         <button class="deleteNote show-on-note-hover btn-link" type="button" data-index="{{id}}">
-                            Delete
+                            Löschen
                         </button>
                     </div>
-                    <pre>{{id}}</pre>
-                    <pre>{{dueDate}}</pre>
-                    <p>{{importance}}</p>
-                    <p>{{description}}</p>
                 </div>
                 {{/each}}
             </div>

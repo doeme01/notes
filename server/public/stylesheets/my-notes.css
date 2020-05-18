@@ -2,28 +2,16 @@
     width: 100%;
 }
 
-.notes-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
 .title {
     padding-bottom: 0.5em;
     margin-bottom: 1em;
     border-bottom: 1px solid darkgray;
 }
 
-.notes-container h6 {
-    margin: 0;
-}
-
-.notes-container > * {
-    flex-basis: 25%;
-    margin-right: 2em;
-    margin-bottom: 2em;
-    padding: 1em;
-    border-radius: 0.5em;
+.notes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .notes-container > *:nth-of-type(odd) {
@@ -34,27 +22,58 @@
     background-color: rgb(238, 233, 232);
 }
 
-.note {
-    transition: box-shadow 0.2s;
-}
-
-.note:hover {
-    box-shadow: 0 0 3px 1px rgba(150, 50, 0, 0.3);
-}
-
-.note-title {
+.note-card {
+    position: relative;
     display: flex;
-    justify-content: space-between;
+    flex-basis: 29%;
+    margin-right: 2em;
+    margin-bottom: 2em;
+    border-radius: 0.5em;
 }
 
-.note-title button {
-    font-size: 0.8em;
+.note-card:hover .actions {
+    visibility: visible;
+    background-color: rgba(150, 50, 0, 0.5);
+    opacity: 1;
+    width: 80px;
+}
+
+.note-card:hover .show-on-note-hover {
+    visibility: visible;
 }
 
 .show-on-note-hover {
     visibility: hidden;
 }
 
-.note:hover .show-on-note-hover {
-    visibility: visible;
+.note {
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+    transition: box-shadow 0.2s;
+}
+
+.note h6 {
+    margin: 0;
+}
+
+.actions {
+    position: absolute;
+    height: 100%;
+    opacity: 0;
+    width: 60px;
+    border-radius: 0.5em;
+    right: 0;
+    transition: all 0.4s ease-out;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actions > * {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 0 !important;
 }
