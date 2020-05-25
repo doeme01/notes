@@ -1,5 +1,5 @@
 import { Project } from '../data/project.js';
-import { persistProject } from '../service/project-service.js';
+import { persistNote } from '../service/project-service.js';
 import { AppRouter, ROUTES } from '../router.js';
 
 export class NewNotePage {
@@ -83,7 +83,7 @@ export class NewNotePage {
 
     submitProject() {
         if (this.validateProject()) {
-            persistProject(
+            persistNote(
                 new Project(this.newNoteTitle, this.newNoteDescription, this.newNoteImportance, this.newNoteDueDate),
                 (_) => AppRouter.routeTo(ROUTES.myNotes)
             );

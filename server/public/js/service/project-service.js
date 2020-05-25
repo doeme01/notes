@@ -1,23 +1,38 @@
-const projectAPI = '/project';
-export const persistProject = function (project, onSuccess) {
-    if (project && project.isValid()) {
-        $.post(projectAPI, project, (res) => {
+const noteAPI = '/note';
+export const persistNote = function (note, onSuccess) {
+    if (note && note.isValid()) {
+        $.post(noteAPI, note, (res) => {
             onSuccess(res);
         });
     }
 };
 
-export const getProjects = function (onFinish) {
-    $.get(projectAPI, (res) => {
+export const getUnfinishedNotes = function (onFinish) {
+    $.get(noteAPI, (res) => {
         onFinish(res);
     });
 };
 
-export const deleteProject = function (projectId, onSuccess) {
-    if (projectId) {
+export const getAllNotes = function (onFinish) {
+    $.get(noteAPI + '?includeFinished=true', (res) => {
+        onFinish(res);
+    });
+};
+
+export const deleteNote = function (noteId, onSuccess) {
+    if (noteId) {
         $.ajax({
-            url: `${projectAPI}/${projectId}`,
+            url: `${noteAPI}/${noteId}`,
             type: 'DELETE',
+        }).done((res) => onSuccess(res));
+    }
+};
+
+export const completeNote = function (noteId, onSuccess) {
+    if (noteId) {
+        $.ajax({
+            url: `${noteAPI}/${noteId}`,
+            type: 'PUT',
         }).done((res) => onSuccess(res));
     }
 };

@@ -243,6 +243,14 @@ button.btn-link {
     transition: transform 0.2s;
 }
 
+button.btn-link.text-large {
+    font-size: 1.5em;
+}
+
+button.btn-link.text-bold {
+    font-weight: 600;
+}
+
 button.btn-link:hover {
     transform: scale(1.1);
 }

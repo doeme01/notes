@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const projectRouter = require('./routes/project');
+const noteRouter = require('./routes/note');
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/project', projectRouter);
+app.use('/note', noteRouter);
 app.use(express.static('./node_modules/jquery/dist'));
 app.use(express.static('./node_modules/normalize.css/'));
 
