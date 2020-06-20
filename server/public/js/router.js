@@ -26,6 +26,13 @@ export const URL_PARAM_HANDLER = {
             dueDate: ROUTES.myNotes.pageObject.sortByDueDate,
         },
     },
+    includeFinishedNotes: {
+        identifier: 'includeFinished',
+        handlers: {
+            true: ROUTES.myNotes.pageObject.showAllNotes,
+            false: ROUTES.myNotes.pageObject.showActiveNotes,
+        },
+    },
 };
 
 export class AppRouter {

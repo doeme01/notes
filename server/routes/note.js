@@ -2,16 +2,6 @@ const noteService = require('../service/note-service');
 const express = require('express');
 const router = express.Router();
 
-// TODO remove before commit
-for (let i = 0; i < 9; i++) {
-    noteService.saveNote({
-        title: `Note #${i + 1}`,
-        description: 'any description',
-        importance: i % 2 === 0 ? 1 : 3,
-        dueDate: `2020-01-0${i + 1}`,
-    });
-}
-
 /* Saves a new Project. */
 router.post('/', function (req, res, next) {
     const savedNote = noteService.saveNote(req.body);
@@ -49,5 +39,15 @@ router.put('/:id', function (req, res, next) {
         res.sendStatus(400);
     }
 });
+
+// generating dummy data on server start
+for (let i = 0; i < 9; i++) {
+    noteService.saveNote({
+        title: `Note #${i + 1}`,
+        description: 'any description',
+        importance: i % 2 === 0 ? 1 : 3,
+        dueDate: `2020-01-0${i + 1}`,
+    });
+}
 
 module.exports = router;

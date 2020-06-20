@@ -1,10 +1,13 @@
-import { deleteNote, completeNote, getUnfinishedNotes } from '../service/note-service.js';
+import { deleteNote, completeNote, getUnfinishedNotes, getAllNotes } from '../service/note-service.js';
 import { AppRouter, URL_PARAM_HANDLER } from '../router.js';
 
 export class MyNotesPage {
     constructor() {
         this.shouldSortByDueDate = false;
         this.shouldSortByImportance = false;
+        this.currentShownNotes = undefined;
+        this.allNotes = undefined;
+        this.activeNotes = undefined;
     }
 
     get title() {
@@ -23,20 +26,25 @@ export class MyNotesPage {
 
     renderView(onRender, options) {
         getUnfinishedNotes((res) => {
-            if (this.shouldSortByImportance) {
-                res.sort(this.compareNotesByImportance);
-            } else if (this.shouldSortByDueDate) {
-                res.sort(this.compareNotesByDueDate);
-            }
-            this.notes = res;
-            onRender(this.template({ notes: this.notes }));
+            this.activeNotes = res;
+            this.currentShownNotes = this.sortNotes(res);
+            onRender(this.template({ notes: this.currentShownNotes }));
         });
+    }
+
+    sortNotes(notesToSort) {
+        if (this.shouldSortByImportance) {
+            notesToSort.sort(this.compareNotesByImportance);
+        } else if (this.shouldSortByDueDate) {
+            notesToSort.sort(this.compareNotesByDueDate);
+        }
+        return notesToSort;
     }
 
     sortByImportance = () => {
         this.shouldSortByImportance = true;
-        if (this.notes) {
-            this.repaintUi(this.notes.sort(this.compareNotesByImportance));
+        if (this.currentShownNotes) {
+            this.repaintUi(this.currentShownNotes.sort(this.compareNotesByImportance));
         }
         AppRouter.persistQueryParamState(URL_PARAM_HANDLER.sort.identifier, 'importance');
     };
@@ -47,8 +55,8 @@ export class MyNotesPage {
 
     sortByDueDate = () => {
         this.shouldSortByDueDate = true;
-        if (this.notes) {
-            this.repaintUi(this.notes.sort(this.compareNotesByDueDate));
+        if (this.currentShownNotes) {
+            this.repaintUi(this.currentShownNotes.sort(this.compareNotesByDueDate));
         }
         AppRouter.persistQueryParamState(URL_PARAM_HANDLER.sort.identifier, 'dueDate');
     };
@@ -57,25 +65,37 @@ export class MyNotesPage {
         return new Date(a.dueDate) - new Date(b.dueDate);
     }
 
+    showActiveNotes = () => {
+        getUnfinishedNotes((res) => {
+            this.activeNotes = res;
+            this.repaintUi(this.sortNotes(this.activeNotes));
+        });
+        AppRouter.persistQueryParamState(URL_PARAM_HANDLER.includeFinishedNotes.identifier, 'false');
+    };
+
     showAllNotes = () => {
-        console.log('showing all notes');
+        getAllNotes((res) => {
+            this.allNotes = res;
+            this.repaintUi(this.sortNotes(this.allNotes));
+        });
+        AppRouter.persistQueryParamState(URL_PARAM_HANDLER.includeFinishedNotes.identifier, 'true');
     };
 
     performActionOnNote(note, action, params) {
-        if (note && this.notes) {
+        if (note && this.currentShownNotes) {
             action.apply(this, [params, this.repaintUi]);
-        } else if (!this.notes) {
+        } else if (!this.currentShownNotes) {
             console.error('You cannot delete a note before content was rendered');
         } else {
             console.error(`Could not find Note with id ${note.id} within fetched Notes`);
         }
     }
 
-    repaintUi = (res) => {
-        this.notes = res;
+    repaintUi = (notesToDisplay) => {
+        this.currentShownNotes = notesToDisplay;
         $('main')
             .hide()
-            .html(this.template({ notes: res }))
+            .html(this.template({ notes: notesToDisplay }))
             .show();
         this.onInit();
     };
@@ -103,7 +123,7 @@ export class MyNotesPage {
     }
 
     getNoteById(idToDelete) {
-        return this.notes.find((item) => item.id === idToDelete);
+        return this.currentShownNotes.find((item) => item.id === idToDelete);
     }
 
     addButtonListeners(element, action) {
