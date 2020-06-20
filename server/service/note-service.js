@@ -2,18 +2,20 @@ const crypto = require('crypto');
 const notes = [];
 const mandatoryNoteAttributes = ['title', 'dueDate', 'importance'];
 
-function isValidNote(project) {
-    return mandatoryNoteAttributes.every((attr) => !!project[attr]);
+function isValidNote(note) {
+    return mandatoryNoteAttributes.every((attr) => !!note[attr]);
 }
 
-const saveNote = function (project) {
-    if (isValidNote(project)) {
-        project.creationDate = new Date();
-        project.finished = false;
-        project.finishDate = undefined;
-        project.id = crypto.randomBytes(16).toString('hex');
-        notes.push(project);
-        return project;
+const saveNote = function (note) {
+    if (isValidNote(note)) {
+        note.creationDate = new Date();
+        note.finished = false;
+        note.finishDate = undefined;
+        note.id = crypto.randomBytes(16).toString('hex');
+        notes.push(note);
+        return note;
+    } else {
+        console.error(`Given Note is not valid, ${note}`);
     }
 };
 

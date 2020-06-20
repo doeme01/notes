@@ -19,6 +19,13 @@ export const URL_PARAM_HANDLER = {
             light: enableLightMode,
         },
     },
+    sort: {
+        identifier: 'sort',
+        handlers: {
+            importance: ROUTES.myNotes.pageObject.sortByImportance,
+            dueDate: ROUTES.myNotes.pageObject.sortByDueDate,
+        },
+    },
 };
 
 export class AppRouter {
@@ -149,4 +156,11 @@ export class AppRouter {
             });
         }
     }
+
+    static persistQueryParamState = (queryParamName, queryParamValue) => {
+        const url = new URL(window.location.href);
+        url.searchParams.set(queryParamName, queryParamValue);
+        // change url without reloading page
+        history.pushState({}, null, url.href);
+    };
 }

@@ -1,5 +1,5 @@
-import { Project } from '../data/project.js';
-import { persistNote } from '../service/project-service.js';
+import { Note } from '../data/note.js';
+import { persistNote } from '../service/note-service.js';
 import { AppRouter, ROUTES } from '../router.js';
 
 export class NewNotePage {
@@ -51,11 +51,11 @@ export class NewNotePage {
 
     changeInputDate(isoDateString) {
         this.dueDateInput$.val(isoDateString);
-        this.validateProject([this.dueDateInput$.attr('id')]);
+        this.validateNote([this.dueDateInput$.attr('id')]);
     }
 
-    validateProject(inputsToUpdate = []) {
-        const errorObject = Project.validateProject(
+    validateNote(inputsToUpdate = []) {
+        const errorObject = Note.validateProject(
             this.newNoteTitle,
             this.newNoteDescription,
             this.newNoteImportance,
@@ -82,9 +82,9 @@ export class NewNotePage {
     }
 
     submitProject() {
-        if (this.validateProject()) {
+        if (this.validateNote()) {
             persistNote(
-                new Project(this.newNoteTitle, this.newNoteDescription, this.newNoteImportance, this.newNoteDueDate),
+                new Note(this.newNoteTitle, this.newNoteDescription, this.newNoteImportance, this.newNoteDueDate),
                 (_) => AppRouter.routeTo(ROUTES.myNotes)
             );
         }
@@ -95,7 +95,7 @@ export class NewNotePage {
     }
 
     loadFormValidationListeners(formInputs) {
-        formInputs.forEach((formInput) => $(formInput).blur((_) => this.validateProject([$(formInput).attr('id')])));
+        formInputs.forEach((formInput) => $(formInput).blur((_) => this.validateNote([$(formInput).attr('id')])));
     }
 
     loadStarRatingListeners() {

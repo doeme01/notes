@@ -2,6 +2,19 @@
     <body>
         <div class="my-notes">
             <h2 class="title">Deine Notizen</h2>
+            <div class="action-bar">
+                <button id="btn-show-all" class="sliding-btn" type="button">
+                    Alle anzeigen
+                </button>
+
+                <button id="btn-filter-dueDate" class="sliding-btn" type="button">
+                    Nach Datum sortieren
+                </button>
+
+                <button id="btn-filter-importance" class="sliding-btn" type="button">
+                    Nach Wichtigkeit sortieren
+                </button>
+            </div>
             <div class="notes-container">
                 {{#each notes}}
                 <div class="note-card">

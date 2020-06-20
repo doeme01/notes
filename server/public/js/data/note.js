@@ -1,6 +1,6 @@
 import { maxLength, minLength, maxNumericValue, minNumericValue, required, dateInFuture } from '../utils/validators.js';
 
-let validators = {
+const validators = {
     title: [{ fn: required }, { fn: minLength, arg: 3 }, { fn: maxLength, arg: 25 }],
     description: [
         { fn: minLength, arg: 0 },
@@ -10,7 +10,7 @@ let validators = {
     dueDate: [{ fn: required }, { fn: dateInFuture }],
 };
 
-export class Project {
+export class Note {
     constructor(title, description, importance, dueDate) {
         this.title = title;
         this.description = description;
@@ -19,7 +19,7 @@ export class Project {
     }
 
     isValid() {
-        return Project.validateProject(this.title, this.description, this.importance, this.dueDate);
+        return Note.validateProject(this.title, this.description, this.importance, this.dueDate);
     }
 
     static validateProject(title, description, importance, dueDate) {

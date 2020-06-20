@@ -3,18 +3,16 @@ import * as styleUtils from './style-utils.js';
 import { AppRouter } from './router.js';
 
 export class Application {
-    router;
-
     constructor() {
         this.onInit();
         this.router = new AppRouter();
     }
 
-    onInit = () => {
+    onInit() {
         this.loadDomListeners();
-    };
+    }
 
-    loadDomListeners = () => {
+    loadDomListeners() {
         $('#link-new').click(() => {
             this.router.navigateTo(ROUTES.new);
         });
@@ -30,5 +28,5 @@ export class Application {
         $('#style-toggle').click(() => {
             styleUtils.toggleStyle();
         });
-    };
+    }
 }
