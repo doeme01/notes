@@ -3,10 +3,6 @@
         <div class="my-notes">
             <h2 class="title">Deine Notizen</h2>
             <div class="action-bar">
-                <button id="btn-show-all" class="sliding-btn" type="button">
-                    Alle anzeigen
-                </button>
-
                 <button id="btn-filter-dueDate" class="sliding-btn" type="button">
                     Nach Datum sortieren
                 </button>
@@ -26,6 +22,7 @@
                             <p>{{description}}</p>
                         </div>
                     </div>
+                    {{#unless finished}}
                     <div class="actions">
                         <button
                             class="checkNote show-on-note-hover btn-link text-large"
@@ -48,6 +45,28 @@
                         >
                             &cross;
                         </button>
+                    </div>
+                    {{/unless}}
+                </div>
+                {{/each}}
+            </div>
+            <div class="finished-notes">
+                <div>&nbsp;</div>
+                <button id="btn-show-all" class="btn-link" type="button" data-index="{{id}}">
+                    &nbsp;
+                </button>
+                <div>&nbsp;</div>
+            </div>
+            <div class="notes-container">
+                {{#each finishedNotes}}
+                <div class="note-card done">
+                    <div class="note">
+                        <div>
+                            <h6>{{title}}</h6>
+                            <p>{{dueDate}}</p>
+                            <p>{{importance}}</p>
+                            <p>{{description}}</p>
+                        </div>
                     </div>
                 </div>
                 {{/each}}

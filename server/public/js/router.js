@@ -29,7 +29,7 @@ export const URL_PARAM_HANDLER = {
     includeFinishedNotes: {
         identifier: 'includeFinished',
         handlers: {
-            true: ROUTES.myNotes.pageObject.showAllNotes,
+            true: ROUTES.myNotes.pageObject.toggleFinishedNotes,
             false: ROUTES.myNotes.pageObject.showActiveNotes,
         },
     },

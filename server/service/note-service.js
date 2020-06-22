@@ -19,10 +19,10 @@ const saveNote = function (note) {
     }
 };
 
-const getNotes = function (includeFinished = false) {
+const getNotes = function (getFinishedNotes = false) {
     const allNotes = [...notes] || [];
-    if (includeFinished) {
-        return allNotes;
+    if (getFinishedNotes) {
+        return allNotes.filter((note) => note.finished);
     }
     return allNotes.filter((note) => !note.finished);
 };
