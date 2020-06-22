@@ -23,13 +23,13 @@ input,
 textarea,
 button {
     font-family: inherit;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(var(--color-white), 0.8);
     font-size: 1em;
     padding: 6px 10px;
     margin: 8px 0;
     border: none;
-    border-bottom: 1px solid rgba(150, 50, 0, 0.8);
-    color: rgba(150, 50, 0, 1);
+    border-bottom: 1px solid rgb(var(--primary-color));
+    color: var(--primary-color-rgba);
 }
 
 input:focus,
@@ -37,7 +37,7 @@ textarea:focus,
 button:focus {
     outline: transparent solid 1px;
     border-color: transparent;
-    box-shadow: 0 0 3px 1px rgba(150, 50, 0, 0.3);
+    box-shadow: 0 0 3px 1px rgba(var(--primary-color), 0.3);
 }
 
 textarea {
@@ -52,7 +52,7 @@ form .submit {
 }
 
 .error-text {
-    color: rgba(150, 50, 0, 1);
+    color: var(--primary-color-rgba);
     font-size: 0.7em;
     padding-bottom: 1em;
 }
@@ -67,7 +67,7 @@ form .submit {
 
 .rating-holder #selected-rating {
     font-weight: 600;
-    color: rgba(150, 50, 0, 1);
+    color: var(--primary-color-rgba);
 }
 
 .rating {
@@ -79,20 +79,20 @@ form .submit {
     display: inline-block;
     position: relative;
     width: 1.1em;
-    color: rgba(150, 50, 0, 0.5);
+    color: rgba(var(--primary-color), 0.5);
 }
 
 .rating > span:hover:before,
 .rating > span:hover ~ span:before {
     content: '\2605';
     position: absolute;
-    color: rgba(150, 50, 0, 0.8);
+    color: rgba(var(--primary-color), 0.8);
 }
 
 .selected-star:before {
     content: '\2605';
     position: absolute;
-    color: rgba(150, 50, 0, 0.5);
+    color: rgba(var(--primary-color), 0.5);
 }
 
 .quick-actions {

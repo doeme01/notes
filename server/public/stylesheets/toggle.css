@@ -18,7 +18,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(150, 50, 0, 0.35);
+    background-color: var(--primary-color-rgba);
+    opacity: 0.35;
     transition: 0.2s;
     transition-timing-function: linear;
 }
@@ -30,12 +31,12 @@
     top: 1px;
     height: calc(1.5rem - 2px);
     width: calc(1.5rem - 2px);
-    background-color: white;
+    background-color: rgb(var(--color-white));
     transition: 0.4s;
 }
 
 input:checked + .slider {
-    background-color: rgba(150, 50, 0, 1);
+    background-color: var(--primary-color-rgba);
 }
 
 input:checked + .slider:before {

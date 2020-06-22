@@ -1,3 +1,12 @@
+:root {
+    --primary-color: 150, 50, 0;
+    --primary-color-rgba: rgba(var(--primary-color), 1);
+    --color-odd-rgb: rgb(248, 246, 246);
+    --color-even-rgb: rgb(238, 233, 232);
+    --color-gray: 140, 140, 140;
+    --color-white: 255, 255, 255;
+}
+
 body {
     font-family: 'Quicksand', sans-serif;
     font-weight: 200;
@@ -20,7 +29,7 @@ h6 {
     font-weight: 300;
     text-transform: uppercase;
     font-size: 1.5em;
-    color: rgba(150, 50, 0, 1);
+    color: var(--primary-color-rgba);
 }
 
 h1 {
@@ -58,12 +67,12 @@ header {
 }
 
 header > span {
-    color: gray;
+    color: rgb(var(--color-gray));
     margin-top: -15px;
     padding-top: 10px;
     font-size: 1.2em;
     border-top: 2px solid;
-    border-top-color: rgba(150, 50, 0, 1);
+    border-top-color: var(--primary-color-rgba);
 }
 
 aside {
@@ -82,7 +91,7 @@ aside > div:not(:first-of-type) {
 }
 
 aside > div > span {
-    color: rgba(150, 50, 0, 1);
+    color: var(--primary-color-rgba);
     font-size: 1.2em;
 }
 
@@ -134,7 +143,7 @@ aside ul > li {
 aside ul > li::before {
     content: '\00BB';
     font-size: 1.2em;
-    color: rgba(150, 50, 0, 1);
+    color: var(--primary-color-rgba);
     opacity: 0;
 
     transition: all 0.5s;
@@ -146,7 +155,7 @@ aside ul > li.active::before {
 }
 
 aside ul > li.active a {
-    color: rgba(150, 50, 0, 1);
+    color: var(--primary-color-rgba) !important;
     transition: 0.5s;
 }
 
@@ -191,13 +200,13 @@ section h2 {
 
     border-top: 2px solid;
     border-bottom: 2px solid;
-    border-color: rgba(150, 50, 0, 1);
-    color: rgba(150, 50, 0, 1);
+    border-color: var(--primary-color-rgba);
+    color: var(--primary-color-rgba);
 }
 
 section > p::first-letter {
     font-family: inherit serif;
-    color: rgba(150, 50, 0, 1);
+    color: var(--primary-color-rgba);
     font-size: 2.5em;
     line-height: 1em;
     padding-right: 0.1em;
@@ -205,13 +214,13 @@ section > p::first-letter {
 
 section:nth-of-type(odd) {
     flex-direction: row;
-    background-color: rgb(248, 246, 246);
+    background-color: var(--color-odd-rgb);
     transform: skewY(-2deg);
 }
 
 section:nth-of-type(even) {
     flex-direction: row-reverse;
-    background-color: rgb(238, 233, 232);
+    background-color: var(--color-even-rgb);
     transform: skewY(2deg);
 }
 
@@ -230,7 +239,7 @@ footer {
     display: flex;
     flex: 1 1 0;
     justify-content: center;
-    color: rgb(102, 101, 101);
+    color: rgb(var(--color-gray));
 }
 
 button.btn-link {
@@ -261,9 +270,9 @@ button.btn-link:focus {
 
 .sliding-btn {
     display: inline-block;
-    background-color: rgba(150, 50, 0, 0.75);
+    background-color: rgba(var(--primary-color), 0.75);
     border-radius: 5px;
-    color: white;
+    color: rgb(var(--color-white));
     text-align: center;
     padding: 6px 10px;
     font-size: 1em;
@@ -273,7 +282,7 @@ button.btn-link:focus {
 
 .sliding-btn:hover,
 .sliding-btn.active {
-    background-color: rgba(150, 50, 0, 1);
+    background-color: var(--primary-color-rgba);
 }
 
 .sliding-btn span {

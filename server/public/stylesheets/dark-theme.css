@@ -1,6 +1,14 @@
+:root {
+    --bg-dark-body-rgb: rgb(189, 185, 185);
+    --bg-dark-primary-rgb: rgb(116, 4, 13);
+    --dark-color-even-rgb: rgb(163, 152, 150);
+    --dark-color-odd-rgba: rgba(160, 149, 131, 0.35);
+    --dark-background-rgb: rgb(224, 223, 223);
+}
+
 body.dark-mode {
-    background-color: rgb(189, 185, 185);
-    color: rgb(245, 243, 243);
+    background-color: var(--bg-dark-body-rgb);
+    color: var(--dark-background-rgb);
 }
 
 body.dark-mode h1,
@@ -9,38 +17,42 @@ h3,
 h4,
 h5,
 h6 {
-    color: rgb(116, 4, 13);
+    color: var(--bg-dark-primary-rgb);
 }
 
 body.dark-mode a {
-    color: rgb(241, 237, 237);
+    color: rgba(var(--color-white), 0.5);
+}
+
+body.dark-mode a:hover {
+    color: rgba(var(--color-white), 0.8);
 }
 
 body.dark-mode header > span {
-    color: rgb(102, 101, 101);
-    border-top-color: rgb(116, 4, 13);
+    color: rgb(var(--color-gray));
+    border-top-color: var(--bg-dark-primary-rgb);
 }
 
 body.dark-mode section {
-    color: rgb(224, 223, 223);
-    box-shadow: 5px 5px 18px 2px rgb(224, 223, 223);
+    color: var(--dark-background-rgb);
+    box-shadow: 5px 5px 18px 2px var(--dark-background-rgb);
 }
 
 body.dark-mode section:nth-of-type(odd) {
-    background-color: rgba(160, 149, 131, 0.35);
+    background-color: var(--dark-color-odd-rgba);
 }
 
 body.dark-mode section:nth-of-type(even) {
-    background-color: rgb(163, 152, 150);
+    background-color: var(--dark-color-even-rgb);
 }
 
 body.dark-mode section h2 {
-    color: rgb(128, 36, 40);
-    border-color: rgb(128, 36, 40);
+    color: var(--bg-dark-primary-rgb);
+    border-color: var(--bg-dark-primary-rgb);
 }
 
 body.dark-mode section > p::first-letter {
-    color: rgb(128, 36, 40);
+    color: var(--bg-dark-primary-rgb);
 }
 
 body.dark-mode aside .moon-svg {
@@ -56,35 +68,35 @@ body.dark-mode aside .sun-svg {
 body.dark-mode input,
 body.dark-mode textarea,
 body.dark-mode button {
-    background-color: rgba(239, 234, 234, 0.65);
-    color: rgba(150, 50, 0, 1);
+    background-color: rgba(var(--color-white), 0.45);
+    color: var(--bg-dark-primary-rgb);
 }
 
 body.dark-mode button:hover,
 body.dark-mode button.active {
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(var(--color-white), 0.75);
 }
 
 body.dark-mode input:focus,
 textarea:focus {
-    box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 3px 1px rgba(var(--color-white), 0.3);
 }
 
 body.dark-mode .rating > span {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(var(--color-white), 0.5);
 }
 
 body.dark-mode .rating > span:hover:before,
 body.dark-mode .rating > span:hover ~ span:before {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(var(--color-white), 0.8);
 }
 
 body.dark-mode .selected-star:before {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(var(--color-white), 0.5);
 }
 
 body.dark-mode .action-bar {
-    background-color: rgb(163, 152, 150);
+    background-color: var(--dark-color-even-rgb);
 }
 
 body.dark-mode .note {
@@ -92,13 +104,13 @@ body.dark-mode .note {
 }
 
 body.dark-mode .notes-container > *:nth-of-type(odd) {
-    background-color: rgba(160, 149, 131, 0.35);
+    background-color: var(--dark-color-odd-rgba);
 }
 
 body.dark-mode .notes-container > *:nth-of-type(even) {
-    background-color: rgb(163, 152, 150);
+    background-color: var(--dark-color-even-rgb);
 }
 
 body.dark-mode .note-card.done {
-    background-color: rgba(140, 140, 140, 0.5);
+    background-color: rgba(var(--color-gray), 0.5);
 }
