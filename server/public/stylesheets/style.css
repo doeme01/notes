@@ -261,7 +261,7 @@ button.btn-link:focus {
 
 .sliding-btn {
     display: inline-block;
-    background-color: rgba(150, 50, 0, 0.8);
+    background-color: rgba(150, 50, 0, 0.75);
     border-radius: 5px;
     color: white;
     text-align: center;
@@ -272,7 +272,7 @@ button.btn-link:focus {
 }
 
 .sliding-btn:hover,
-.sliding-btn {
+.sliding-btn.active {
     background-color: rgba(150, 50, 0, 1);
 }
 

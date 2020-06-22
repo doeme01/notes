@@ -83,7 +83,6 @@ export class MyNotesPage {
 
     toggleSortButtonByDueDate(isActive) {
         const sortButton$ = $('#btn-filter-dueDate');
-        console.log(sortButton$);
 
         if (isActive) {
             sortButton$.addClass('active');
@@ -155,6 +154,7 @@ export class MyNotesPage {
 
     deleteNote(idOfNoteToDelete) {
         this.performActionOnNote(this.getNoteById(idOfNoteToDelete), deleteNote, idOfNoteToDelete);
+        this.activeNotes = this.activeNotes.filter((note) => note.id !== idOfNoteToDelete);
     }
 
     addCompleteNoteListeners() {

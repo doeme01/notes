@@ -60,7 +60,8 @@ body.dark-mode button {
     color: rgba(150, 50, 0, 1);
 }
 
-body.dark-mode button:hover {
+body.dark-mode button:hover,
+body.dark-mode button.active {
     background-color: rgba(255, 255, 255, 0.75);
 }
 
@@ -80,4 +81,24 @@ body.dark-mode .rating > span:hover ~ span:before {
 
 body.dark-mode .selected-star:before {
     color: rgba(255, 255, 255, 0.5);
+}
+
+body.dark-mode .action-bar {
+    background-color: rgb(163, 152, 150);
+}
+
+body.dark-mode .note {
+    color: black;
+}
+
+body.dark-mode .notes-container > *:nth-of-type(odd) {
+    background-color: rgba(160, 149, 131, 0.35);
+}
+
+body.dark-mode .notes-container > *:nth-of-type(even) {
+    background-color: rgb(163, 152, 150);
+}
+
+body.dark-mode .note-card.done {
+    background-color: rgba(140, 140, 140, 0.5);
 }
