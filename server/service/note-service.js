@@ -7,13 +7,21 @@ function isValidNote(note) {
 }
 
 const saveNote = function (note) {
-    if (isValidNote(note)) {
+    if (isValidNote(note) && !note.id) {
         note.creationDate = new Date();
         note.finished = false;
         note.finishDate = undefined;
         note.id = crypto.randomBytes(16).toString('hex');
         notes.push(note);
         return note;
+    } else if (note.id) {
+        const indexOfNoteToUpdate = notes.findIndex((storedNote) => storedNote.id === note.id);
+        if (indexOfNoteToUpdate) {
+            notes[indexOfNoteToUpdate] = { ...notes[indexOfNoteToUpdate], ...note };
+            return notes[indexOfNoteToUpdate];
+        } else {
+            console.error(`Given Id ${note.id} of note to update not found on Server`);
+        }
     } else {
         console.error(`Given Note is not valid, ${note}`);
     }

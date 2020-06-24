@@ -11,11 +11,12 @@ const validators = {
 };
 
 export class Note {
-    constructor(title, description, importance, dueDate) {
+    constructor(title, description, importance, dueDate, id) {
         this.title = title;
         this.description = description;
         this.importance = importance;
         this.dueDate = dueDate;
+        this.id = id;
     }
 
     isValid() {

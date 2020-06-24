@@ -1,5 +1,5 @@
 import { completeNote, deleteNote, getAllNotes, getUnfinishedNotes } from '../service/note-service.js';
-import { AppRouter, URL_PARAM_HANDLER } from '../router.js';
+import { AppRouter, URL_PARAM_HANDLER, ROUTES } from '../router.js';
 
 export class MyNotesPage {
     constructor() {
@@ -19,6 +19,7 @@ export class MyNotesPage {
     onInit() {
         this.addDeleteListeners();
         this.addCompleteNoteListeners();
+        this.addEditNoteListeners();
         this.addActionBarListeners();
         this.showActiveActionBarButton();
     }
@@ -48,7 +49,8 @@ export class MyNotesPage {
             }
         }
         notesToSort.map(
-            (note) => (note.dueDate = new Date(note.dueDate).toLocaleDateString(this.locale, this.dateFormatOptions))
+            (note) =>
+                (note.formattedDueDate = new Date(note.dueDate).toLocaleDateString(this.locale, this.dateFormatOptions))
         );
         return notesToSort;
     }
@@ -166,11 +168,20 @@ export class MyNotesPage {
         this.addButtonListeners('.checkNote', this.checkNote.bind(this));
     }
 
+    addEditNoteListeners() {
+        this.addButtonListeners('.editNote', this.editNote.bind(this));
+    }
+
     checkNote(idOfNoteToComplete) {
         this.performActionOnNote(this.getNoteById(idOfNoteToComplete), completeNote, idOfNoteToComplete);
         const noteToFinish = this.activeNotes.find((note) => note.id === idOfNoteToComplete);
         this.activeNotes = this.activeNotes.filter((note) => note.id !== idOfNoteToComplete);
         this.finishedNotes.push(noteToFinish);
+    }
+
+    editNote(idOfNoteToEdit) {
+        $('#note-holder').val(JSON.stringify(this.getNoteById(idOfNoteToEdit)));
+        AppRouter.routeTo(ROUTES.new);
     }
 
     addActionBarListeners() {

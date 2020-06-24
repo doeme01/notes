@@ -21,7 +21,7 @@
                             <div class="note-values">
                                 <div>
                                     <span class="note-label">Fälligkeitsdatum:</span>
-                                    <span class="note-value">{{dueDate}}</span>
+                                    <span class="note-value">{{formattedDueDate}}</span>
                                 </div>
                                 <div>
                                     <span class="note-label">Wichtigkeit:</span>
@@ -48,7 +48,7 @@
                             ✔️
                         </button>
                         <button
-                            class="show-on-note-hover btn-link text-medium text-bold"
+                            class="editNote show-on-note-hover btn-link text-medium text-bold"
                             type="button"
                             data-index="{{id}}"
                         >
@@ -82,7 +82,7 @@
                             <div class="note-values">
                                 <div>
                                     <span class="note-label">Fälligkeitsdatum:</span>
-                                    <span class="note-value">{{dueDate}}</span>
+                                    <span class="note-value">{{formattedDueDate}}</span>
                                 </div>
                                 <div>
                                     <span class="note-label">Wichtigkeit:</span>

@@ -21,12 +21,15 @@ export class NewNotePage {
         this.descriptionInput$ = $('#description');
         this.dueDateInput$ = $('#dueDate');
         this.importanceInput$ = $('#selected-rating');
+        this.noteIdInput = $('#noteId');
         this.formInputs$ = $('form .input-element');
 
         this.loadSubmitListener();
         this.loadFormValidationListeners([...this.formInputs$]);
         this.loadStarRatingListeners();
         this.loadActionBtnListeners(this.actionButtonListeners);
+
+        this.loadEditNoteIfExists();
     }
 
     get title() {
@@ -47,6 +50,10 @@ export class NewNotePage {
 
     get newNoteImportance() {
         return Number(this.importanceInput$.val()) || undefined;
+    }
+
+    get noteId() {
+        return this.noteIdInput.val() || undefined;
     }
 
     changeInputDate(isoDateString) {
@@ -84,10 +91,32 @@ export class NewNotePage {
     submitProject() {
         if (this.validateNote()) {
             persistNote(
-                new Note(this.newNoteTitle, this.newNoteDescription, this.newNoteImportance, this.newNoteDueDate),
+                new Note(
+                    this.newNoteTitle,
+                    this.newNoteDescription,
+                    this.newNoteImportance,
+                    this.newNoteDueDate,
+                    this.noteId
+                ),
                 (_) => AppRouter.routeTo(ROUTES.myNotes)
             );
         }
+    }
+
+    loadEditNoteIfExists() {
+        const jsonNoteToEdit = $('#note-holder').val();
+        if (jsonNoteToEdit) {
+            const note = JSON.parse(jsonNoteToEdit);
+            this.preloadNote(note);
+        }
+    }
+
+    preloadNote(note) {
+        this.titleInput$.val(note.title);
+        this.descriptionInput$.val(note.description);
+        this.dueDateInput$.val(note.dueDate);
+        this.noteIdInput.val(note.id);
+        $(`#rating-${note.importance}`).click();
     }
 
     loadSubmitListener() {
