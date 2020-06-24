@@ -114,3 +114,11 @@ body.dark-mode .notes-container > *:nth-of-type(even) {
 body.dark-mode .note-card.done {
     background-color: rgba(var(--color-gray), 0.5);
 }
+
+body.dark-mode .note-label {
+    color: black;
+}
+
+body.dark-mode .note-value {
+    color: rgb(var(--color-white));
+}

@@ -256,6 +256,10 @@ button.btn-link.text-large {
     font-size: 1.5em;
 }
 
+button.btn-link.text-medium {
+    font-size: 1.2em;
+}
+
 button.btn-link.text-bold {
     font-weight: 600;
 }

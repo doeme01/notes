@@ -50,7 +50,7 @@
 
     border-radius: 5px;
     padding: 10px;
-    background-color: rgb(var(--color-white));
+    background-color: rgba(var(--color-gray), 0.2);
 }
 
 .action-bar > button:hover {
@@ -86,6 +86,31 @@
     flex-direction: row;
     padding: 1em;
     transition: box-shadow 0.2s;
+}
+
+.note-values {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 1em;
+}
+
+.note-values > * {
+    display: flex;
+    flex-direction: column;
+}
+
+.note-label {
+    color: rgb(var(--color-gray));
+    font-size: 0.8em;
+    padding-bottom: 0.2em;
+}
+
+.note-value {
+    padding-left: 1em;
+    padding-bottom: 0.5em;
+    display: flex;
+    flex-direction: row;
 }
 
 /* Every 3rd and the last note-card does not require a margin because it's at the end of the line */

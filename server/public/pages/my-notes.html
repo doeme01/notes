@@ -17,33 +17,49 @@
                     <div class="note">
                         <div>
                             <h6>{{title}}</h6>
-                            <p>{{dueDate}}</p>
-                            <p>{{importance}}</p>
-                            <p>{{description}}</p>
+
+                            <div class="note-values">
+                                <div>
+                                    <span class="note-label">Fälligkeitsdatum:</span>
+                                    <span class="note-value">{{dueDate}}</span>
+                                </div>
+                                <div>
+                                    <span class="note-label">Wichtigkeit:</span>
+                                    <span class="note-value">
+                                        {{#times importance}}
+                                        <span class="selected-star">☆</span>
+                                        {{/times}}
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="note-label">Beschreibung:</span>
+                                    <span class="note-value">{{description}}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     {{#unless finished}}
                     <div class="actions">
                         <button
-                            class="checkNote show-on-note-hover btn-link text-large"
+                            class="checkNote show-on-note-hover btn-link text-medium"
                             type="button"
                             data-index="{{id}}"
                         >
-                            &check;
+                            ✔️
                         </button>
                         <button
-                            class="show-on-note-hover btn-link text-large text-bold"
+                            class="show-on-note-hover btn-link text-medium text-bold"
                             type="button"
                             data-index="{{id}}"
                         >
-                            &Rang;
+                            ✍🏻
                         </button>
                         <button
-                            class="deleteNote show-on-note-hover btn-link text-large"
+                            class="deleteNote show-on-note-hover btn-link text-medium"
                             type="button"
                             data-index="{{id}}"
                         >
-                            &cross;
+                            🗑️
                         </button>
                     </div>
                     {{/unless}}
@@ -63,9 +79,24 @@
                     <div class="note">
                         <div>
                             <h6>{{title}}</h6>
-                            <p>{{dueDate}}</p>
-                            <p>{{importance}}</p>
-                            <p>{{description}}</p>
+                            <div class="note-values">
+                                <div>
+                                    <span class="note-label">Fälligkeitsdatum:</span>
+                                    <span class="note-value">{{dueDate}}</span>
+                                </div>
+                                <div>
+                                    <span class="note-label">Wichtigkeit:</span>
+                                    <span class="note-value">
+                                        {{#times importance}}
+                                        <span class="selected-star">☆</span>
+                                        {{/times}}
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="note-label">Beschreibung:</span>
+                                    <span class="note-value">{{description}}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

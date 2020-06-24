@@ -8,6 +8,8 @@ export class MyNotesPage {
         this.shouldShowFinishedNotes = false;
         this.finishedNotes = [];
         this.activeNotes = [];
+        this.locale = 'de-DE';
+        this.dateFormatOptions = { year: '2-digit', month: '2-digit', day: '2-digit' };
     }
 
     get title() {
@@ -45,6 +47,9 @@ export class MyNotesPage {
                 notesToSort.sort(this.compareNotesByDueDate);
             }
         }
+        notesToSort.map(
+            (note) => (note.dueDate = new Date(note.dueDate).toLocaleDateString(this.locale, this.dateFormatOptions))
+        );
         return notesToSort;
     }
 

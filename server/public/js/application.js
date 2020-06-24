@@ -10,6 +10,7 @@ export class Application {
 
     onInit() {
         this.loadDomListeners();
+        this.registerCustomHandlebarsHelpers();
     }
 
     loadDomListeners() {
@@ -27,6 +28,14 @@ export class Application {
 
         $('#style-toggle').click(() => {
             styleUtils.toggleStyle();
+        });
+    }
+
+    registerCustomHandlebarsHelpers() {
+        Handlebars.registerHelper('times', function (n, block) {
+            let accum = '';
+            for (let i = 0; i < n; ++i) accum += block.fn(i);
+            return accum;
         });
     }
 }
