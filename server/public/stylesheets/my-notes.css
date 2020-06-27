@@ -53,10 +53,6 @@
     background-color: rgba(var(--color-gray), 0.2);
 }
 
-.action-bar > button:hover {
-    text-decoration: underline;
-}
-
 .note-card {
     position: relative;
     display: flex;
