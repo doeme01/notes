@@ -1,5 +1,5 @@
 {
-    // "extends": "eslint:recommended",
+    "extends": "eslint:recommended",
     "rules": {
         "semi": ["error", "always"],
         "quotes": [2, "single", "avoid-escape"],
@@ -10,7 +10,13 @@
         "ecmaVersion": 2019,
         "sourceType": "module",
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "arrowFunctions": true
+
         }
+    },
+    "env": {
+        "jquery": true,
+        "es6": true
     }
 }

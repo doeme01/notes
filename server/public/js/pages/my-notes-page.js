@@ -1,8 +1,9 @@
 import { completeNote, deleteNote, getAllNotes, getUnfinishedNotes } from '../service/note-service.js';
-import { AppRouter, URL_PARAM_HANDLER, ROUTES } from '../router.js';
+import { AppRouter } from '../router.js';
 
 export class MyNotesPage {
-    constructor() {
+    constructor(router) {
+        this.router = router;
         this.shouldSortByDueDate = false;
         this.shouldSortByImportance = false;
         this.shouldShowFinishedNotes = false;
@@ -55,12 +56,12 @@ export class MyNotesPage {
         return notesToSort;
     }
 
-    sortByImportance = () => {
+    sortByImportance() {
         this.shouldSortByImportance = true;
         this.shouldSortByDueDate = false;
         this.repaintUi();
-        AppRouter.persistQueryParamState(URL_PARAM_HANDLER.sort.identifier, 'importance');
-    };
+        AppRouter.persistQueryParamState(this.router.queryParamHandlers.sort.identifier, 'importance');
+    }
 
     toggleSortByImportanceButton(isActive) {
         const sortButton$ = $('#btn-filter-importance');
@@ -77,12 +78,12 @@ export class MyNotesPage {
         return b.importance - a.importance;
     }
 
-    sortByDueDate = () => {
+    sortByDueDate() {
         this.shouldSortByDueDate = true;
         this.shouldSortByImportance = false;
         this.repaintUi();
-        AppRouter.persistQueryParamState(URL_PARAM_HANDLER.sort.identifier, 'dueDate');
-    };
+        AppRouter.persistQueryParamState(this.router.queryParamHandlers.sort.identifier, 'dueDate');
+    }
 
     compareNotesByDueDate(a, b) {
         return new Date(a.dueDate) - new Date(b.dueDate);
@@ -104,7 +105,7 @@ export class MyNotesPage {
             this.activeNotes = this.sortNotes(res);
             this.repaintUi();
         });
-        AppRouter.persistQueryParamState(URL_PARAM_HANDLER.includeFinishedNotes.identifier, 'false');
+        AppRouter.persistQueryParamState(this.router.queryParamHandlers.includeFinishedNotes.identifier, 'false');
     };
 
     toggleFinishedNotes = () => {
@@ -121,7 +122,7 @@ export class MyNotesPage {
             this.repaintUi();
         }
         AppRouter.persistQueryParamState(
-            URL_PARAM_HANDLER.includeFinishedNotes.identifier,
+            this.router.queryParamHandlers.includeFinishedNotes.identifier,
             this.shouldShowFinishedNotes.toString()
         );
     };
@@ -181,7 +182,7 @@ export class MyNotesPage {
 
     editNote(idOfNoteToEdit) {
         $('#note-holder').val(JSON.stringify(this.getNoteById(idOfNoteToEdit)));
-        AppRouter.routeTo(ROUTES.new);
+        this.router.navigateTo(this.router.routes.new);
     }
 
     addActionBarListeners() {

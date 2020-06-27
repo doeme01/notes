@@ -1,14 +1,11 @@
-import { URL_PARAM_HANDLER } from './router.js';
-import { AppRouter } from './router.js';
-
 export const toggleStyle = () => {
     const $body = $('body');
     if ($body.hasClass('dark-mode')) {
         enableLightMode();
-        AppRouter.persistQueryParamState(URL_PARAM_HANDLER.viewMode.identifier, 'light');
+        return 'light';
     } else {
         enableDarkMode();
-        AppRouter.persistQueryParamState(URL_PARAM_HANDLER.viewMode.identifier, 'dark');
+        return 'dark';
     }
 };
 

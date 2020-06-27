@@ -1,4 +1,5 @@
 const noteAPI = '/note';
+
 export const persistNote = function (note, onSuccess) {
     if (note && note.isValid()) {
         $.post(noteAPI, note, (res) => {

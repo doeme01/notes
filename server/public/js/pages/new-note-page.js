@@ -1,20 +1,11 @@
 import { Note } from '../data/note.js';
 import { persistNote } from '../service/note-service.js';
-import { AppRouter, ROUTES } from '../router.js';
 
 export class NewNotePage {
-    actionButtonListeners = {
-        'btn-tomorrow': () => {
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            this.changeInputDate(tomorrow.toISOString().substring(0, 10));
-        },
-        'btn-nextMonth': () => {
-            const today = new Date();
-            const nextMonth = new Date(today.getFullYear(), today.getMonth() + 2, 1, 18);
-            this.changeInputDate(nextMonth.toISOString().substring(0, 10));
-        },
-    };
+    constructor(router) {
+        this.router = router;
+        this.actionButtonListeners = this.generateActionButtonListeners();
+    }
 
     onInit() {
         this.titleInput$ = $('#title');
@@ -98,7 +89,7 @@ export class NewNotePage {
                     this.newNoteDueDate,
                     this.noteId
                 ),
-                (_) => AppRouter.routeTo(ROUTES.myNotes)
+                () => this.router.navigateTo(this.router.routes.myNotes)
             );
         }
     }
@@ -120,11 +111,11 @@ export class NewNotePage {
     }
 
     loadSubmitListener() {
-        $('.submit > button').click((_) => this.submitProject());
+        $('.submit > button').click(() => this.submitProject());
     }
 
     loadFormValidationListeners(formInputs) {
-        formInputs.forEach((formInput) => $(formInput).blur((_) => this.validateNote([$(formInput).attr('id')])));
+        formInputs.forEach((formInput) => $(formInput).blur(() => this.validateNote([$(formInput).attr('id')])));
     }
 
     loadStarRatingListeners() {
@@ -147,8 +138,23 @@ export class NewNotePage {
         }
     }
 
+    generateActionButtonListeners() {
+        return {
+            'btn-tomorrow': () => {
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                this.changeInputDate(tomorrow.toISOString().substring(0, 10));
+            },
+            'btn-nextMonth': () => {
+                const today = new Date();
+                const nextMonth = new Date(today.getFullYear(), today.getMonth() + 2, 1, 18);
+                this.changeInputDate(nextMonth.toISOString().substring(0, 10));
+            },
+        };
+    }
+
     loadActionBtnListeners(clickHandlers) {
-        for (let clickHandlerKey in clickHandlers) {
+        for (const clickHandlerKey in clickHandlers) {
             const btn$ = $(`#${clickHandlerKey}`);
             btn$.click(() => clickHandlers[clickHandlerKey]());
         }

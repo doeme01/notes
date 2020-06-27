@@ -24,7 +24,7 @@ export class Note {
     }
 
     static validateProject(title, description, importance, dueDate) {
-        let validate = (validatorKey, input) => {
+        const validate = (validatorKey, input) => {
             let errorObj = {};
             validators[validatorKey].forEach((validationObj) => {
                 errorObj = {
@@ -38,7 +38,7 @@ export class Note {
             }
         };
 
-        let validation = {
+        const validation = {
             ...validate('title', title),
             ...validate('description', description),
             ...validate('importance', importance),
